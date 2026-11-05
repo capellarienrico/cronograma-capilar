@@ -69,6 +69,11 @@
 
       <!-- Action buttons in header -->
       <div class="flex items-center gap-2">
+        <a href="releases.html" class="text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5" title="Ver Releases & Novidades">
+          <i data-lucide="tag" class="w-3.5 h-3.5 text-slate-500"></i>
+          <span class="hidden md:inline">Releases</span>
+          <span class="px-1 py-0.2 rounded text-[10px] font-bold bg-brand-100 text-brand-700">v1.3</span>
+        </a>
         <button id="btnInstallPwa" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Instalar App</span>
@@ -819,7 +824,16 @@
   </div>
 
   <footer class="mt-auto py-6 text-center text-xs text-slate-400 border-t border-slate-200/60 bg-white/50">
-    <p>CapilarFlow • Desenvolvido para Cabelos 2C/3A Fio Fino & Scalp Care</p>
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>CapilarFlow • Desenvolvido para Cabelos 2C/3A Fio Fino & Scalp Care</p>
+      <div class="flex items-center gap-3">
+        <a href="releases.html" class="hover:text-slate-700 flex items-center gap-1">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-500"></i> Notas de Atualização (Releases)
+        </a>
+        <span>•</span>
+        <a href="https://github.com/capellarienrico/cronograma-capilar" target="_blank" rel="noopener noreferrer" class="hover:text-slate-700">GitHub</a>
+      </div>
+    </div>
   </footer>
 
   <script src="app.js"></script>

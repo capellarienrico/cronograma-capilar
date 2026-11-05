@@ -3,6 +3,7 @@ const CACHE_NAME = 'capilarflow-cache-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './releases.html',
   './styles.css',
   './app.js',
   './manifest.json',

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notas de Atualização & Releases • CapilarFlow</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fdf4f5',
+              100: '#fbe8eb',
+              500: '#d75a6f',
+              600: '#bf3b54',
+              700: '#a12b43',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition mr-1" title="Voltar ao App">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        </a>
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-rose-400 text-white flex items-center justify-center shadow-md shadow-brand-500/20">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-base leading-tight text-slate-900">CapilarFlow</h1>
+          <p class="text-xs text-slate-500">Histórico de Versões & Atualizações</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="https://github.com/capellarienrico/cronograma-capilar" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="index.html" class="bg-brand-600 hover:bg-brand-700 text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
+          <i data-lucide="play" class="w-3.5 h-3.5"></i>
+          <span>Abrir App</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 space-y-8">
+
+    <!-- Hero Title -->
+    <div class="space-y-2">
+      <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Versão Atual: v1.3.0
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        Releases & Notas de Atualização
+      </h2>
+      <p class="text-sm text-slate-600 max-w-2xl leading-relaxed">
+        Acompanhe todas as novidades, melhorias e correções implementadas no <strong>CapilarFlow</strong>.
+      </p>
+    </div>
+
+    <!-- Timeline of Releases -->
+    <div class="relative border-l-2 border-slate-200 ml-4 sm:ml-6 space-y-10">
+
+      <!-- ================= RELEASE v1.3.0 ================= -->
+      <article class="relative pl-6 sm:pl-8 group">
+        <!-- Dot -->
+        <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-brand-100 flex items-center justify-center"></span>
+        
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200">
+                v1.3.0
+              </span>
+              <h3 class="font-bold text-lg text-slate-900">
+                Catálogo Multi-Alternativas & Comparador de Preços ao Vivo
+              </h3>
+            </div>
+            <time class="text-xs text-slate-400 font-medium">05 de Novembro de 2026</time>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Esta versão traz um catálogo com mais de 30 produtos verificados, filtros cruzados em tempo real por faixa de preço e atalhos diretos para verificar ofertas e fretes no Google Shopping e Mercado Livre.
+          </p>
+
+          <div class="space-y-3 pt-1">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-emerald-600"></i> Novidades & Destaques:
+            </h4>
+            <ul class="text-xs text-slate-600 space-y-2 list-none pl-1">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Múltiplas opções por categoria:</strong> Pelo menos 2 a 3 alternativas testadas para cada etapa (Dermatite, Pré-Poo, Shampoo Neutro, H, N, R, Acidificante e Finalizador).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Filtros Duplos Simultâneos:</strong> Cruze qualquer etapa do cronograma com as 3 faixas de orçamento (🟢 Baratinhos até R$ 25, 🟡 Custo-Benefício R$ 30-55, 🟣 Profissional R$ 70+).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Links ao Vivo do Google Shopping & Mercado Livre:</strong> Em cada card de produto, consulte o menor preço de hoje, descontos e fretes em farmácias e e-commerces com apenas 1 clique.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Botão de Cotação de Reposição no Armário:</strong> Compare preços de recompra direto dos produtos cadastrados no seu armário.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1"><i data-lucide="tag" class="w-3.5 h-3.5"></i> release</span>
+            <span>•</span>
+            <a href="https://github.com/capellarienrico/cronograma-capilar/commit/85615b3" target="_blank" class="hover:text-brand-600 font-mono text-[11px] underline">commit 85615b3</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ================= RELEASE v1.2.0 ================= -->
+      <article class="relative pl-6 sm:pl-8 group">
+        <!-- Dot -->
+        <span class="absolute -left-[7px] top-1.5 w-3.5 h-3.5 rounded-full bg-slate-300 ring-4 ring-slate-100"></span>
+        
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                v1.2.0
+              </span>
+              <h3 class="font-bold text-lg text-slate-900">
+                Guia de Escolha de Produtos & Analisador de Rótulos
+              </h3>
+            </div>
+            <time class="text-xs text-slate-400 font-medium">05 de Novembro de 2026</time>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Inclusão do guia visual de compras de farmácia e o motor interativo para análise de ingredientes INCI.
+          </p>
+
+          <div class="space-y-3 pt-1">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-sky-600"></i> Mudanças Inclusas:
+            </h4>
+            <ul class="text-xs text-slate-600 space-y-2 list-none pl-1">
+              <li class="flex items-start gap-2">
+                <span class="text-sky-500 font-bold">✓</span>
+                <span><strong>Analisador de Composição (INCI):</strong> Campo para colar a lista de ingredientes de qualquer produto e detectar automaticamente se é H, N ou R.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-500 font-bold">✓</span>
+                <span><strong>Detector de Riscos para Fio Fino:</strong> Alertas para parafina líquida, óleo mineral ou queratina excessiva que provocam <em>buildup</em> e rigidez em baixa porosidade.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-500 font-bold">✓</span>
+                <span><strong>Guia de 3 Passos na Farmácia:</strong> Como identificar a ordem dos primeiros 5 ingredientes e o teste de textura no pote.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ================= RELEASE v1.1.0 ================= -->
+      <article class="relative pl-6 sm:pl-8 group">
+        <!-- Dot -->
+        <span class="absolute -left-[7px] top-1.5 w-3.5 h-3.5 rounded-full bg-slate-300 ring-4 ring-slate-100"></span>
+        
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                v1.1.0
+              </span>
+              <h3 class="font-bold text-lg text-slate-900">
+                PWA para Android, Offline & Publicação no GitHub Pages
+              </h3>
+            </div>
+            <time class="text-xs text-slate-400 font-medium">05 de Novembro de 2026</time>
+          </div>
+
+          <div class="space-y-3 pt-1">
+            <ul class="text-xs text-slate-600 space-y-2 list-none pl-1">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>PWA Instalável no Celular:</strong> Suporte nativo ao evento <code>beforeinstallprompt</code> com botão verde "Instalar App".</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Modo Offline com Service Worker:</strong> Cache automático de todos os arquivos estáticos para abrir mesmo sem internet.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>Deploy Online no GitHub Pages:</strong> Hospedado em <code>capellarienrico.github.io/cronograma-capilar</code>.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ================= RELEASE v1.0.0 ================= -->
+      <article class="relative pl-6 sm:pl-8 group">
+        <!-- Dot -->
+        <span class="absolute -left-[7px] top-1.5 w-3.5 h-3.5 rounded-full bg-slate-300 ring-4 ring-slate-100"></span>
+        
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                v1.0.0
+              </span>
+              <h3 class="font-bold text-lg text-slate-900">
+                Lançamento Inicial: CapilarFlow
+              </h3>
+            </div>
+            <time class="text-xs text-slate-400 font-medium">05 de Novembro de 2026</time>
+          </div>
+
+          <div class="space-y-3 pt-1">
+            <ul class="text-xs text-slate-600 space-y-2 list-none pl-1">
+              <li class="flex items-start gap-2">
+                <span class="text-slate-400 font-bold">•</span>
+                <span><strong>Diagnóstico Especializado:</strong> Cronograma calibrado para 2C/3A fino e couro cabeludo oleoso com dermatite.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-400 font-bold">•</span>
+                <span><strong>Ciclo de 4 Semanas:</strong> Grid visual com 12 etapas divididas em Hidratação, Nutrição e Reconstrução.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-400 font-bold">•</span>
+                <span><strong>Módulo Scalp Care:</strong> Protocolo de aplicação na raiz, regras de pré-poo e Timer de 3 minutos para shampoos medicamentosos.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-400 font-bold">•</span>
+                <span><strong>Calibrador de Porosidade:</strong> Integração com o teste do copo d'água (baixa, média e alta porosidade).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-slate-400 font-bold">•</span>
+                <span><strong>Persistência Local:</strong> Histórico e armário salvos diretamente no navegador (<code>localStorage</code>).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto py-6 text-center text-xs text-slate-400 border-t border-slate-200/60 bg-white/50">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>CapilarFlow • Desenvolvido por <a href="https://github.com/capellarienrico" target="_blank" class="text-slate-600 font-semibold hover:underline">@capellarienrico</a></p>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-slate-700">App Principal</a>
+        <span>•</span>
+        <a href="https://github.com/capellarienrico/cronograma-capilar" target="_blank" class="hover:text-slate-700">Código Fonte</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
