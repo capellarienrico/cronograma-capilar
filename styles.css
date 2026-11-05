@@ -94,6 +94,26 @@
   color: #ffffff;
 }
 
+/* Budget filter buttons */
+.budget-filter-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.budget-filter-btn:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.budget-filter-btn.active {
+  background-color: #059669;
+  color: #ffffff;
+}
+
 /* Week Step Cards */
 .step-item {
   position: relative;

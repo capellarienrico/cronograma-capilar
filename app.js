@@ -773,98 +773,192 @@ function showToast(msg) {
 // ================= GUIA DE PRODUTOS & ANALISADOR =================
 
 const RECOMMENDED_MARKET_PRODUCTS = [
+  // --- TIER 1: BARATINHOS (ATÉ R$ 25) ---
   {
-    id: 'rec_dercos',
-    name: 'Dercos Anticaspa DS',
-    brand: 'Vichy',
+    id: 'rec_ceto_gen',
+    name: 'Shampoo Cetoconazol 2%',
+    brand: 'Genérico (Medley / EMS)',
     category: 'dermatite',
-    price: '~ R$ 90 - 110',
-    why: 'Padrão ouro em dermatite seborreica. Controla o fungo Malassezia sem causar tanta ardência.'
+    budget: 'baratinho',
+    price: '~ R$ 15 - 20',
+    why: 'Tratamento antifúngico clínico mais acessível e eficaz contra a descamação da dermatite.'
   },
   {
     id: 'rec_yamasterol',
     name: 'Yamasterol Amarelo (Babosa & D-Pantenol)',
-    brand: 'Yamá',
+    brand: 'Yamá Cosméticos',
     category: 'pre-poo',
-    price: '~ R$ 8 - 14',
-    why: 'Essencial como PRÉ-POO! Fórmula aquosa, sem silicones pesados, protege o comprimento fino sem pesar.'
+    budget: 'baratinho',
+    price: '~ R$ 8 - 14 (900g)',
+    why: 'O melhor custo-benefício para Pré-Poo. Fórmula fluida, solúvel em água, protege as pontas finas sem pesar.'
+  },
+  {
+    id: 'rec_pantene_micelar',
+    name: 'Shampoo Pantene Pro-V Micelar Purifica',
+    brand: 'Pantene',
+    category: 'shampoo-neutro',
+    budget: 'baratinho',
+    price: '~ R$ 18 - 22',
+    why: 'Shampoo transparente que limpa a raiz oleosa diariamente sem agredir as pontas secas.'
+  },
+  {
+    id: 'rec_skala_babosa',
+    name: 'Skala Expert Babosa (Aloe Vera)',
+    brand: 'Skala Cosméticos',
+    category: 'hidratação',
+    budget: 'baratinho',
+    price: '~ R$ 10 - 13 (1kg)',
+    why: 'Fórmula muito líquida e levinha. Absorção imediata para baixa porosidade sem causar acúmulo.'
+  },
+  {
+    id: 'rec_skala_argan',
+    name: 'Skala Expert Óleo de Argan',
+    brand: 'Skala Cosméticos',
+    category: 'nutrição',
+    budget: 'baratinho',
+    price: '~ R$ 10 - 13 (1kg)',
+    why: 'Nutrição suave com óleo leve. Não pesa no cacho 2C/3A fino se enxaguar bem.'
+  },
+  {
+    id: 'rec_gelatina_verde',
+    name: 'Gelatina Não Sai da Minha Cabeça',
+    brand: 'Salon Line',
+    category: 'finalizador',
+    budget: 'baratinho',
+    price: '~ R$ 16 - 20',
+    why: 'Fixação e definição para 2C/3A sem peso nenhum de óleos pesados. Deixa os cachos soltos e brilhantes.'
+  },
+
+  // --- TIER 2: CUSTO-BENEFÍCIO / INTERMEDIÁRIO (R$ 30 - 55) ---
+  {
+    id: 'rec_head_clinical',
+    name: 'Shampoo Head & Shoulders Clinical Solutions',
+    brand: 'Head & Shoulders',
+    category: 'dermatite',
+    budget: 'custo-beneficio',
+    price: '~ R$ 38 - 45',
+    why: 'Com sulfeto de selênio. Alívio rápido da coceira e caspa persistente sem ressecar tanto quanto outros.'
   },
   {
     id: 'rec_ghee_banana',
     name: 'Be(M)dita Ghee Banana & Aloe Vera',
     brand: 'Lola Cosmetics',
     category: 'hidratação',
+    budget: 'custo-beneficio',
     price: '~ R$ 35 - 45',
-    why: 'Textura em emulsão cremosa-aquosa. Hidrata profundamente sem plastificar o fio de baixa porosidade.'
-  },
-  {
-    id: 'rec_skala_babosa',
-    name: 'Skala Expert Babosa',
-    brand: 'Skala Cosméticos',
-    category: 'hidratação',
-    price: '~ R$ 10 - 14',
-    why: 'Opção super econômica, super fluida e leve. Excelente para hidratações rápidas durante a semana.'
+    why: 'Consistência em emulsão aquosa perfeita. Devolve água e maleabilidade sem plastificar o fio de baixa porosidade.'
   },
   {
     id: 'rec_danos_booster',
-    name: 'Booster / Máscara Líquida Danos Vorazes',
+    name: 'Booster Máscara Líquida Danos Vorazes',
     brand: 'Lola Cosmetics',
     category: 'nutrição',
+    budget: 'custo-beneficio',
     price: '~ R$ 38 - 48',
-    why: 'Máscara líquida que age em segundos com Cannabinoid Active System (CBA). Dá brilho imediato sem murchar o fio fino.'
+    why: 'Líquida que vira creme instantâneo no banho. Dá brilho espelhado e alinhamento em 10 segundos sem murchar o cacho fino.'
   },
   {
-    id: 'rec_maria_natureza',
-    name: 'Máscara Maria Natureza Óleos Milenares',
-    brand: 'Salon Line',
-    category: 'nutrição',
-    price: '~ R$ 22 - 30',
-    why: 'Nutrição com óleo de argan e semente de uva. Liberada e não pesa se usada em quantidade moderada.'
-  },
-  {
-    id: 'rec_acidificante',
+    id: 'rec_acidificante_lola',
     name: 'Acidificante Densidade pH 3.0',
     brand: 'Lola Cosmetics',
     category: 'acidificante',
+    budget: 'custo-beneficio',
     price: '~ R$ 36 - 45',
-    why: 'O segredo para o brilho e desembaraço fácil. Equilibra o pH das cutículas e combate a aspereza instantaneamente.'
+    why: 'Produto chave para o seu cabelo: sela as cutículas, acaba com a aspereza e desembaraça feito seda.'
   },
   {
     id: 'rec_tarja_preta',
-    name: 'Máscara Restauradora Tarja Preta',
+    name: 'Máscara Restauradora Tarja Preta (Vegetal)',
     brand: 'Lola Cosmetics',
     category: 'reconstrução',
+    budget: 'custo-beneficio',
     price: '~ R$ 35 - 45',
-    why: 'Queratina vegetal e aminoácidos em dosagem segura. Ideal para a reconstrução mensal de baixa porosidade.'
+    why: 'Aminoácidos na medida certa. Seguro para baixa porosidade na aplicação mensal.'
+  },
+  {
+    id: 'rec_jelly_lola',
+    name: 'Meu Cacho Minha Vida Jelly Gel',
+    brand: 'Lola Cosmetics',
+    category: 'finalizador',
+    budget: 'custo-beneficio',
+    price: '~ R$ 28 - 35',
+    why: 'Gel hidratante com quinoa e patauá. Define ondas 2C e cachos 3A com aspecto natural e sem frizz.'
+  },
+
+  // --- TIER 3: PROFISSIONAL / SALÃO (R$ 70+) ---
+  {
+    id: 'rec_dercos',
+    name: 'Dercos Anticaspa DS (Cabelos Oleosos)',
+    brand: 'Vichy Laboratoires',
+    category: 'dermatite',
+    budget: 'premium',
+    price: '~ R$ 90 - 115',
+    why: 'Referência dermatológica mundial. Tecnologia com Selênio DS e Ácido Salicílico que trata o couro sem arder.'
+  },
+  {
+    id: 'rec_wella_reboost',
+    name: 'Máscara Oil Reflections Luminous Reboost',
+    brand: 'Wella Professionals',
+    category: 'hidratação',
+    budget: 'premium',
+    price: '~ R$ 120 - 145',
+    why: 'Máscara luxuosa com pantenol e óleo de semente de camélia. Ilumina os fios instantaneamente com toque suave.'
+  },
+  {
+    id: 'rec_kpro_acidificante',
+    name: 'pH Balancer Acidificante Profissional',
+    brand: 'K.Pro',
+    category: 'acidificante',
+    budget: 'premium',
+    price: '~ R$ 75 - 90',
+    why: 'O acidificante mais usado em salões. Fecha as escamas da fibra capilar na hora, gerando maciez imediata.'
   },
   {
     id: 'rec_oil_light',
-    name: 'Oil Reflections Luminous Light',
+    name: 'Oil Reflections Luminous Light (Fio Fino)',
     brand: 'Wella Professionals',
     category: 'finalizador',
-    price: '~ R$ 75 - 110',
-    why: 'Óleo ultraleve com óleo de camélia. Não pesa no cacho 2C/3A e confere brilho espelhado.'
+    budget: 'premium',
+    price: '~ R$ 85 - 110',
+    why: 'A versão "Light" foi criada especificamente para cabelos finos. Não pesa nem engordura as pontas.'
   }
 ];
 
-function renderRecommendedCatalogue() {
+let currentBudgetFilter = 'all';
+
+function renderRecommendedCatalogue(filterBudget = 'all') {
+  currentBudgetFilter = filterBudget;
   const container = document.getElementById('recommendedCatalogue');
   if (!container) return;
 
+  const filtered = filterBudget === 'all'
+    ? RECOMMENDED_MARKET_PRODUCTS
+    : RECOMMENDED_MARKET_PRODUCTS.filter(p => p.budget === filterBudget);
+
   container.innerHTML = '';
-  RECOMMENDED_MARKET_PRODUCTS.forEach(item => {
+  filtered.forEach(item => {
     const isAlreadyInShelf = appState.products.some(p => p.name.toLowerCase() === item.name.toLowerCase());
+
+    let budgetTag = '';
+    if (item.budget === 'baratinho') budgetTag = '<span class="text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded font-bold">🟢 Econômico</span>';
+    if (item.budget === 'custo-beneficio') budgetTag = '<span class="text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.2 rounded font-bold">🟡 Custo-Benefício</span>';
+    if (item.budget === 'premium') budgetTag = '<span class="text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.2 rounded font-bold">🟣 Profissional</span>';
 
     const card = document.createElement('div');
     card.className = 'p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col justify-between space-y-2.5';
     card.innerHTML = `
       <div>
-        <div class="flex items-center justify-between text-[10px] font-semibold text-slate-500 mb-1">
+        <div class="flex items-center justify-between text-[10px] font-semibold text-slate-500 mb-1.5">
           <span class="uppercase tracking-wider px-1.5 py-0.5 rounded bg-white border border-slate-200">${item.category}</span>
-          <span class="text-emerald-700 font-bold">${item.price}</span>
+          ${budgetTag}
         </div>
-        <h4 class="font-bold text-xs text-slate-900 leading-snug">${item.name}</h4>
-        <span class="text-[11px] text-slate-500 block mb-1.5">${item.brand}</span>
+        <div class="flex items-baseline justify-between gap-1">
+          <h4 class="font-bold text-xs text-slate-900 leading-snug">${item.name}</h4>
+        </div>
+        <div class="text-[11px] text-slate-500 font-medium flex items-center justify-between mt-0.5 mb-1.5">
+          <span>${item.brand}</span>
+          <span class="font-bold text-emerald-800 bg-emerald-100/60 px-1.5 py-0.2 rounded">${item.price}</span>
+        </div>
         <p class="text-[11px] text-slate-600 leading-relaxed">${item.why}</p>
       </div>
 
@@ -883,6 +977,15 @@ function renderRecommendedCatalogue() {
     `;
 
     container.appendChild(card);
+  });
+
+  // Atualizar botões de filtro de preço
+  document.querySelectorAll('.budget-filter-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.budget-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRecommendedCatalogue(btn.dataset.budget);
+    };
   });
 
   lucide.createIcons();
