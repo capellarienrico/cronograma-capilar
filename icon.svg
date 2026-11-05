@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf3b54" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  
+  <!-- Fundo arredondado -->
+  <rect width="512" height="512" rx="128" fill="url(#grad)" />
+  
+  <!-- Círculo decorativo interno -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="8" />
+
+  <!-- Ícone de gota d'água / cacho brilhante -->
+  <g filter="url(#shadow)" fill="#ffffff">
+    <!-- Gota d'água -->
+    <path d="M256 100 C256 100 150 250 150 330 C150 388 197 435 256 435 C315 435 362 388 362 330 C362 250 256 100 256 100 Z" fill="#ffffff" fill-opacity="0.95"/>
+    <!-- Brilho no topo -->
+    <path d="M256 160 C230 220 200 280 200 320 C200 340 210 360 225 370 C215 355 210 335 215 310 C220 280 245 220 256 160 Z" fill="#ffffff" fill-opacity="0.4"/>
+    <!-- Estrela de brilho -->
+    <path d="M370 140 L380 165 L405 175 L380 185 L370 210 L360 185 L335 175 L360 165 Z" fill="#ffffff" />
+    <path d="M140 200 L146 215 L161 221 L146 227 L140 242 L134 227 L119 221 L134 215 Z" fill="#ffffff" fill-opacity="0.8"/>
+  </g>
+</svg>

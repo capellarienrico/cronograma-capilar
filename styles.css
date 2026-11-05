@@ -1,0 +1,119 @@
+/* CapilarFlow Custom Styles */
+
+/* Custom scrollbar */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Nav Tabs */
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #64748b;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in-out;
+  white-space: nowrap;
+}
+
+.nav-tab:hover {
+  color: #1e293b;
+  background-color: #f8fafc;
+}
+
+.nav-tab.active {
+  color: #bf3b54;
+  background-color: #fdf4f5;
+  font-weight: 600;
+}
+
+/* Tab panes */
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Treatment Radio Cards */
+.treatment-radio-card {
+  cursor: pointer;
+}
+
+.care-badge-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-width: 1.5px;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.treatment-radio-card input:checked + .care-badge-label {
+  box-shadow: 0 0 0 2px #bf3b54;
+  transform: translateY(-1px);
+}
+
+/* Porosity Cards */
+.porosity-card.selected {
+  border-color: #bf3b54 !important;
+  background-color: #fdf4f5 !important;
+  box-shadow: 0 4px 14px rgba(191, 59, 84, 0.12);
+}
+
+/* Product filter buttons */
+.product-filter-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.product-filter-btn:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.product-filter-btn.active {
+  background-color: #bf3b54;
+  color: #ffffff;
+}
+
+/* Week Step Cards */
+.step-item {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.step-item:hover {
+  transform: translateY(-2px);
+}
+
+.step-item.done {
+  opacity: 0.85;
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.pulse-timer {
+  animation: pulseSubtle 1.5s infinite;
+}

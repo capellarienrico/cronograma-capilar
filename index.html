@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Cronograma Capilar & Scalp Care</title>
+  
+  <!-- PWA Manifest & Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#bf3b54">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="CapilarFlow">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fdf4f5',
+              100: '#fbe8eb',
+              200: '#f7d5d9',
+              300: '#f0b3bb',
+              400: '#e58795',
+              500: '#d75a6f',
+              600: '#bf3b54',
+              700: '#a12b43',
+              800: '#86263b',
+              900: '#722436',
+            },
+            tealcare: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              700: '#0f766e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-rose-400 text-white flex items-center justify-center shadow-md shadow-brand-500/20">
+          <i data-lucide="sparkles" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight text-slate-900">CapilarFlow</h1>
+          <p class="text-xs text-slate-500 flex items-center gap-1">
+            <span>2C / 3A • Fio Fino</span>
+            <span class="inline-block w-1 h-1 rounded-full bg-teal-500"></span>
+            <span class="text-teal-700 font-medium">Scalp Care</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Action buttons in header -->
+      <div class="flex items-center gap-2">
+        <button id="btnInstallPwa" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Instalar App</span>
+        </button>
+        <button id="btnQuickLog" class="bg-brand-600 hover:bg-brand-700 text-white px-3.5 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition shadow-sm shadow-brand-600/30">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Registrar Cuidado</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Navigation Tabs -->
+  <div class="bg-white border-b border-slate-200 sticky top-16 z-30 shadow-xs">
+    <div class="max-w-5xl mx-auto px-4 flex gap-1 overflow-x-auto scrollbar-none py-1">
+      <button class="nav-tab active" data-tab="tab-dashboard">
+        <i data-lucide="calendar" class="w-4 h-4"></i>
+        <span>Cronograma & Hoje</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-dermatite">
+        <i data-lucide="shield-alert" class="w-4 h-4 text-teal-600"></i>
+        <span>Dermatite & Cuidados</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-porosidade">
+        <i data-lucide="droplets" class="w-4 h-4 text-sky-500"></i>
+        <span>Teste de Porosidade</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-guia-produtos">
+        <i data-lucide="shopping-bag" class="w-4 h-4 text-emerald-600"></i>
+        <span>Como Escolher Produtos</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-produtos">
+        <i data-lucide="package" class="w-4 h-4"></i>
+        <span>Meu Armário</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-historico">
+        <i data-lucide="history" class="w-4 h-4"></i>
+        <span>Histórico</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- ================= TAB: DASHBOARD & HOJE ================= -->
+    <section id="tab-dashboard" class="tab-pane active space-y-6">
+      
+      <!-- Banner Próxima Lavagem / Hoje -->
+      <div id="todayCard" class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white p-6 sm:p-8 shadow-xl">
+        <div class="absolute right-0 top-0 -mt-6 -mr-6 w-48 h-48 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span id="badgeNextType" class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-500/30 text-brand-300 border border-brand-500/40">
+                Hidratação
+              </span>
+              <span id="badgeScheduleDay" class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">
+                Semana 1 • Lavagem 1
+              </span>
+            </div>
+            <h2 id="nextStepTitle" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Próximo Cuidado: Hidratação
+            </h2>
+            <p id="nextStepDesc" class="text-slate-300 text-sm max-w-xl">
+              Foco em devolver água e maleabilidade para acabar com a sensação áspera do fio fino sem pesar.
+            </p>
+            <div id="dermatitisAlertInCard" class="flex items-center gap-2 text-xs text-teal-300 bg-teal-950/60 border border-teal-800/80 px-3 py-1.5 rounded-lg w-fit mt-2">
+              <i data-lucide="info" class="w-3.5 h-3.5 flex-shrink-0"></i>
+              <span>Lembrete: Se for dia de shampoo anticaspa, aplique pré-poo nas pontas primeiro!</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button id="btnMarkDoneNow" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-3 rounded-xl font-semibold shadow-lg shadow-brand-600/40 flex items-center justify-center gap-2 transition hover:scale-[1.02] active:scale-[0.98]">
+              <i data-lucide="check" class="w-5 h-5"></i>
+              Marcar como Feito Hoje
+            </button>
+            <button id="btnCustomWash" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 transition">
+              <i data-lucide="sliders" class="w-4 h-4"></i>
+              Outro Cuidado
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Stats Strip -->
+        <div class="mt-6 pt-6 border-t border-slate-700/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
+          <div>
+            <span class="block text-xs text-slate-400">Última lavagem</span>
+            <span id="statLastWash" class="text-sm font-semibold text-white">Nenhum registro ainda</span>
+          </div>
+          <div>
+            <span class="block text-xs text-slate-400">Total de lavagens</span>
+            <span id="statTotalWashes" class="text-sm font-semibold text-white">0 registradas</span>
+          </div>
+          <div>
+            <span class="block text-xs text-slate-400">Shampoo Anticaspa</span>
+            <span id="statLastAntidandruff" class="text-sm font-semibold text-teal-300">Em dia</span>
+          </div>
+          <div>
+            <span class="block text-xs text-slate-400">Ciclo Atual</span>
+            <span id="statCycleProgress" class="text-sm font-semibold text-brand-300">0% concluído</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ciclo de 4 Semanas Interativo -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="calendar-range" class="w-5 h-5 text-brand-600"></i>
+              Ciclo de Tratamentos (4 Semanas)
+            </h3>
+            <p class="text-xs text-slate-500">
+              Personalizado para cabelo 2C/3A fino + raiz mista. Tratamentos com máscara 3x por semana.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-sky-50 text-sky-700 border border-sky-200">
+              <span class="w-2 h-2 rounded-full bg-sky-500"></span> H: Hidratação
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-amber-50 text-amber-700 border border-amber-200">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span> N: Nutrição Leve
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-purple-50 text-purple-700 border border-purple-200">
+              <span class="w-2 h-2 rounded-full bg-purple-500"></span> R: Reconstrução
+            </span>
+          </div>
+        </div>
+
+        <!-- Weeks Grid -->
+        <div id="weeksGrid" class="space-y-4">
+          <!-- Dynamic weeks rendered by app.js -->
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-start gap-2">
+          <i data-lucide="help-circle" class="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0"></i>
+          <div>
+            <strong>E nos outros dias que eu lavo a cabeça?</strong>
+            Nos dias livres entre esses 12 passos, você pode fazer uma <em>Lavagem Simples / Manutenção</em> (apenas shampoo suave na raiz + condicionador rápido nas pontas) ou usar o shampoo anticaspa com pré-poo. Você pode registrar qualquer lavagem a qualquer momento!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TAB: DERMATITE SEBORREICA ================= -->
+    <section id="tab-dermatite" class="tab-pane space-y-6">
+      
+      <!-- Hero card Dermatite -->
+      <div class="bg-gradient-to-r from-teal-900 to-teal-800 text-white rounded-2xl p-6 sm:p-8 shadow-md">
+        <div class="flex items-start gap-4">
+          <div class="p-3 rounded-xl bg-teal-700/50 border border-teal-500/30 text-teal-200">
+            <i data-lucide="shield-check" class="w-8 h-8"></i>
+          </div>
+          <div class="space-y-2">
+            <h2 class="text-xl sm:text-2xl font-bold">Protocolo de Dermatite Seborreica + Fio Fino</h2>
+            <p class="text-sm text-teal-100 max-w-2xl leading-relaxed">
+              A dermatite seborreica é uma inflamação no couro cabeludo ligada ao excesso de oleosidade e ao fungo <em>Malassezia</em>. Lavar com frequência é ótimo para controlar a caspa, mas os shampoos medicamentosos podem estragar o comprimento ondulado se você não aplicar a técnica correta!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timer de Ação do Shampoo Anticaspa -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="timer" class="w-5 h-5 text-teal-600"></i>
+              Timer de Ação do Shampoo Medicamentoso
+            </h3>
+            <p class="text-xs text-slate-500">
+              Shampoos como Cetoconazol, Kelual DS ou Dercos precisam ficar em contato com o couro de 3 a 5 minutos para agir.
+            </p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div id="timerDisplay" class="text-3xl font-mono font-bold text-teal-700 bg-teal-50 px-4 py-2 rounded-xl border border-teal-200">
+              03:00
+            </div>
+            <div class="flex gap-2">
+              <button id="btnStartTimer" class="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+                <i data-lucide="play" class="w-4 h-4"></i> Iniciar
+              </button>
+              <button id="btnResetTimer" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-sm font-medium transition">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- As 4 Regras de Ouro -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Regra 1 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-teal-100 text-teal-800 font-bold flex items-center justify-center text-sm">1</span>
+            <h4 class="font-bold text-slate-900">A Técnica do Pré-Poo Protetor</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Antes de entrar no banho, passe uma camada generosa de um condicionador barato e leve (tipo Yamasterol) ou um óleo vegetal leve (semente de uva) <strong>apenas do meio às pontas</strong>. Quando o shampoo anticaspa escorrer pelo comprimento, ele não vai ressecar seu fio fino!
+          </p>
+        </div>
+
+        <!-- Regra 2 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-800 font-bold flex items-center justify-center text-sm">2</span>
+            <h4 class="font-bold text-slate-900">Distância Zero de Óleo no Couro</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Nunca aplique</strong> máscaras de tratamento, condicionadores, óleos ou cremes de pentear na raiz. Mantenha pelo menos 4 a 5 cm de distância do couro cabeludo. O fungo da dermatite se alimenta de lipídios!
+          </p>
+        </div>
+
+        <!-- Regra 3 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-sm">3</span>
+            <h4 class="font-bold text-slate-900">Proibido Dormir de Cabelo Úmido</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Dormir com a raiz úmida cria uma estufa perfeita para a proliferação fúngica, piorando a descamação e a coceira. Se lavar à noite, use o secador na temperatura morna ou fria na raiz.
+          </p>
+        </div>
+
+        <!-- Regra 4 -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-sky-100 text-sky-800 font-bold flex items-center justify-center text-sm">4</span>
+            <h4 class="font-bold text-slate-900">Alterne os Shampoos</h4>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Não use o shampoo de tratamento medicamentoso todos os 7 dias. Use-o de 2 a 3 vezes por semana (ou conforme receita do dermatologista). Nas outras lavagens diárias, use um shampoo neutro transparente e suave.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Frequência de Uso do Shampoo Anticaspa -->
+      <div class="bg-teal-50 border border-teal-200 rounded-2xl p-6">
+        <h4 class="font-bold text-teal-900 flex items-center gap-2 mb-2">
+          <i data-lucide="bell" class="w-5 h-5 text-teal-700"></i>
+          Registro Rápido do Shampoo de Dermatite
+        </h4>
+        <p class="text-xs text-teal-800 mb-4">
+          Controle quando você usou seu shampoo de tratamento pela última vez para não sobrecarregar o couro nem esquecer as aplicações médicas.
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="btnLogDermatitisOnly" class="bg-teal-700 hover:bg-teal-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            Registrar que usei Shampoo de Dermatite hoje
+          </button>
+          <span id="dermatitisLastDateText" class="text-xs text-teal-700 italic">
+            Último uso registrado: Nunca
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= TAB: TESTE DE POROSIDADE ================= -->
+    <section id="tab-porosidade" class="tab-pane space-y-6">
+      
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="flask-conical" class="w-6 h-6 text-sky-600"></i>
+            O Teste do Copo d'Água (Porosidade)
+          </h2>
+          <p class="text-sm text-slate-500 mt-1">
+            Você mencionou que deixou um fio boiando no copo! O teste avalia o estado das cutículas e a capacidade do fio de absorver e reter água.
+          </p>
+        </div>
+
+        <!-- Instruções e Tempo -->
+        <div class="p-4 bg-sky-50 rounded-xl border border-sky-100 flex items-start gap-3 text-xs text-sky-900">
+          <i data-lucide="clock" class="w-5 h-5 text-sky-600 flex-shrink-0 mt-0.5"></i>
+          <div>
+            <strong>Tempo de espera:</strong> Deixe o fio no copo com água em temperatura ambiente por <strong>cerca de 5 a 10 minutos</strong>. Não empurre com o dedo. Observe a posição final dele abaixo.
+          </div>
+        </div>
+
+        <!-- Opções Interativas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Baixa Porosidade -->
+          <div class="porosity-card cursor-pointer p-5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 transition bg-white space-y-3" data-porosity="baixa">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">🫧</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Boiou</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900">Baixa Porosidade</h4>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                O fio fica na superfície. Cutículas muito fechadas e seladas. Dificuldade de absorver água.
+              </p>
+            </div>
+            <div class="text-xs text-slate-600 pt-2 border-t border-slate-100">
+              <strong>Foco:</strong> Hidratações quentes/leves, evitar excesso de queratina.
+            </div>
+          </div>
+
+          <!-- Média Porosidade -->
+          <div class="porosity-card cursor-pointer p-5 rounded-2xl border-2 border-slate-200 hover:border-emerald-400 transition bg-white space-y-3" data-porosity="media">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">⚖️</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Ficou no Meio</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900">Média Porosidade</h4>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                O fio fica no meio da água. Cutículas equilibradas. Absorve e retém tratamentos com facilidade.
+              </p>
+            </div>
+            <div class="text-xs text-slate-600 pt-2 border-t border-slate-100">
+              <strong>Foco:</strong> Nutrição moderada e Hidratação contínua.
+            </div>
+          </div>
+
+          <!-- Alta Porosidade -->
+          <div class="porosity-card cursor-pointer p-5 rounded-2xl border-2 border-slate-200 hover:border-brand-400 transition bg-white space-y-3" data-porosity="alta">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">⚓</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-600">Afundou</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900">Alta Porosidade</h4>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                O fio foi até o fundo do copo. Cutículas abertas/danificadas. Absorve água na hora e perde logo em seguida.
+              </p>
+            </div>
+            <div class="text-xs text-slate-600 pt-2 border-t border-slate-100">
+              <strong>Foco:</strong> Acidificação para fechar cutículas + Reconstrução + Nutrição seladora.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Porosidade Atual Selecionada -->
+        <div id="porosityStatusBox" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span class="text-xs text-slate-500 block">Sua porosidade configurada atualmente:</span>
+            <h3 id="currentPorosityText" class="text-lg font-bold text-slate-800">
+              Alta Porosidade (Cutículas abertas / toque áspero)
+            </h3>
+            <p id="currentPorosityTip" class="text-xs text-slate-600 mt-0.5">
+              O cronograma está calibrado para repor água com hidratação fluida e selar as pontas com acidificação e nutrição leve.
+            </p>
+          </div>
+          <button id="btnSetPorosityAuto" class="text-xs bg-white hover:bg-slate-100 border border-slate-300 px-3 py-2 rounded-lg font-medium text-slate-700 transition">
+            Clique em um dos 3 cards acima para salvar
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= TAB: COMO ESCOLHER PRODUTOS (GUIA & ANALISADOR) ================= -->
+    <section id="tab-guia-produtos" class="tab-pane space-y-6">
+      
+      <!-- Banner Guia -->
+      <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
+        <div class="flex items-start gap-4">
+          <div class="p-3 rounded-xl bg-emerald-700/50 border border-emerald-500/30 text-emerald-200">
+            <i data-lucide="book-open" class="w-8 h-8"></i>
+          </div>
+          <div class="space-y-2">
+            <h2 class="text-xl sm:text-2xl font-bold">Guia Prático: Como Escolher Produtos Sem Errar</h2>
+            <p class="text-xs sm:text-sm text-emerald-100 max-w-2xl leading-relaxed">
+              Para quem tem <strong>cabelo fino de baixa porosidade + dermatite no couro</strong>, a maioria dos produtos de mercado é pesado demais ou agressivo demais. Aqui você aprende a ler o rótulo em 10 segundos e pode até analisar ingredientes automaticamente!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analisador Interativo de Rótulos / Ingredientes -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
+              <i data-lucide="scan-search" class="w-5 h-5 text-emerald-600"></i>
+              Analisador de Rótulo (Cole a Composição)
+            </h3>
+            <p class="text-xs text-slate-500">
+              Copie os ingredientes da descrição online do produto ou digite o que está no frasco para descobrir a etapa e se ele pesa no seu fio.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <textarea id="inputIngredientCheck" rows="3" placeholder="Ex: Aqua, Cetearyl Alcohol, Aloe Barbadensis Leaf Extract, Panthenol, Glycerin, Hydrolyzed Keratin..." class="w-full text-xs p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+          <div class="flex items-center justify-between gap-3">
+            <button id="btnAnalyzeIngredients" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-sm">
+              <i data-lucide="cpu" class="w-4 h-4"></i> Analisar Composição
+            </button>
+            <button id="btnLoadExampleIngredient" class="text-xs text-slate-500 hover:text-slate-800 underline">
+              Carregar exemplo de teste
+            </button>
+          </div>
+        </div>
+
+        <!-- Resultado da Análise -->
+        <div id="ingredientAnalysisResult" class="hidden p-4 rounded-xl border space-y-3 text-xs">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- As 3 Regras de Ouro na Farmácia / Perfumaria -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-sky-700 font-bold text-sm">
+            <i data-lucide="droplet" class="w-4 h-4 text-sky-500"></i>
+            1. Máscara de Hidratação (H)
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>O que procurar no rótulo:</strong> <em>Aloe Vera (Babosa), Panthenol, Glycerin, Hyaluronic Acid, Extratos de Frutas</em>.<br><br>
+            <strong>Consistência ideal para você:</strong> Cremes leves, fluidos ou textura em gel. Se você virar o pote e ele parecer uma massa de cimento duro, <strong>não compre</strong> (vai pesar no fio fino de baixa porosidade).
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-amber-700 font-bold text-sm">
+            <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i>
+            2. Máscara de Nutrição (N)
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>O que procurar no rótulo:</strong> Óleos leves como <em>Vitis Vinifera (Semente de Uva), Jojoba, Argan, Pracaxi</em>.<br><br>
+            <strong>O que EVITAR:</strong> <em>Shea Butter (Manteiga de Karité) em alta concentração, Óleo de Rícino, Mineral Oil / Paraffinum Liquidum</em>. Eles formam uma capa impermeável no fio fino.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
+          <div class="flex items-center gap-2 text-purple-700 font-bold text-sm">
+            <i data-lucide="shield" class="w-4 h-4 text-purple-500"></i>
+            3. Reconstrução & Acidificante
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>O que procurar:</strong> <em>Hydrolyzed Amino Acids, Plant Collagen, Hydrolyzed Wheat Protein</em>.<br><br>
+            <strong>Atenção máxima:</strong> Em baixa porosidade, o excesso de queratina deixa o cabelo duro e quebradiço! Use no máximo 1x ao mês. Dê preferência a <strong>Acidificantes</strong> (pH 3.0 a 3.5), que dão brilho sem enrijecer o fio.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Vitrine de Produtos Ideais (Adicionar ao Armário em 1 Clique) -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
+              <i data-lucide="thumbs-up" class="w-5 h-5 text-emerald-600"></i>
+              Produtos Recomendados Prontos para Adicionar
+            </h3>
+            <p class="text-xs text-slate-500">
+              Selecionados sob medida para cabelo 2C/3A Fio Fino + Baixa Porosidade + Dermatite no Couro.
+            </p>
+          </div>
+        </div>
+
+        <div id="recommendedCatalogue" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= TAB: MEU ARMÁRIO DE PRODUTOS ================= -->
+    <section id="tab-produtos" class="tab-pane space-y-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="package" class="w-6 h-6 text-brand-600"></i>
+            Armário de Produtos
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Cadastre os produtos que você tem no banheiro para selecioná-los facilmente nas lavagens.
+          </p>
+        </div>
+        <button id="btnOpenAddProductModal" class="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 transition shadow-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i> Adicionar Produto
+        </button>
+      </div>
+
+      <!-- Filtros de categoria -->
+      <div class="flex flex-wrap gap-2 text-xs">
+        <button class="product-filter-btn active" data-cat="all">Todos</button>
+        <button class="product-filter-btn" data-cat="dermatite">Dermatite / Anticaspa</button>
+        <button class="product-filter-btn" data-cat="pre-poo">Pré-Poo</button>
+        <button class="product-filter-btn" data-cat="hidratação">Hidratação (H)</button>
+        <button class="product-filter-btn" data-cat="nutrição">Nutrição (N)</button>
+        <button class="product-filter-btn" data-cat="reconstrução">Reconstrução (R)</button>
+        <button class="product-filter-btn" data-cat="acidificante">Acidificante</button>
+        <button class="product-filter-btn" data-cat="finalizador">Finalizador / Óleo</button>
+      </div>
+
+      <!-- Grid de produtos -->
+      <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Dynamic products rendered by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ================= TAB: HISTÓRICO ================= -->
+    <section id="tab-historico" class="tab-pane space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="history" class="w-6 h-6 text-slate-700"></i>
+            Histórico de Cuidados
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Acompanhe a evolução do seu cabelo e o histórico de cada lavagem.
+          </p>
+        </div>
+        <button id="btnClearHistory" class="text-xs text-rose-600 hover:text-rose-800 hover:underline">
+          Limpar Histórico
+        </button>
+      </div>
+
+      <!-- Timeline de lavagens -->
+      <div id="historyTimeline" class="space-y-3">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MODAL: REGISTRAR CUIDADO ================= -->
+  <div id="modalLogCare" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl border border-slate-200 space-y-5 animate-in fade-in zoom-in-95 duration-200">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="p-2 rounded-xl bg-brand-50 text-brand-600">
+            <i data-lucide="droplet" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-slate-900">Registrar Lavagem & Cuidado</h3>
+            <p class="text-xs text-slate-500">Salve os detalhes do tratamento de hoje</p>
+          </div>
+        </div>
+        <button class="btnCloseModal text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="formLogCare" class="space-y-4">
+        
+        <!-- Data e Hora -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Data</label>
+            <input type="date" id="inputCareDate" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">Hora</label>
+            <input type="time" id="inputCareTime" required class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Etapa Realizada -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1.5">Qual etapa de tratamento?</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <label class="treatment-radio-card">
+              <input type="radio" name="careType" value="Hidratação" checked class="hidden">
+              <span class="care-badge-label bg-sky-50 text-sky-700 border-sky-200">
+                <i data-lucide="droplets" class="w-4 h-4"></i> Hidratação
+              </span>
+            </label>
+            <label class="treatment-radio-card">
+              <input type="radio" name="careType" value="Nutrição" class="hidden">
+              <span class="care-badge-label bg-amber-50 text-amber-700 border-amber-200">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Nutrição
+              </span>
+            </label>
+            <label class="treatment-radio-card">
+              <input type="radio" name="careType" value="Reconstrução" class="hidden">
+              <span class="care-badge-label bg-purple-50 text-purple-700 border-purple-200">
+                <i data-lucide="shield" class="w-4 h-4"></i> Reconstrução
+              </span>
+            </label>
+            <label class="treatment-radio-card">
+              <input type="radio" name="careType" value="Lavagem Simples" class="hidden">
+              <span class="care-badge-label bg-slate-50 text-slate-700 border-slate-200">
+                <i data-lucide="shower-head" class="w-4 h-4"></i> Manutenção
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Checklist Especial: Dermatite e Pré-Poo -->
+        <div class="p-3.5 bg-teal-50/70 border border-teal-200 rounded-2xl space-y-2.5">
+          <span class="text-xs font-bold text-teal-900 block flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-teal-700"></i> Cuidados com o Couro Cabeludo & Pontas
+          </span>
+
+          <label class="flex items-center gap-2 text-xs text-teal-900 cursor-pointer select-none">
+            <input type="checkbox" id="checkDermatitisShampoo" class="rounded text-teal-600 focus:ring-teal-500 w-4 h-4">
+            <span>Usei shampoo medicinal anticaspa (Cetoconazol / Dercos / etc.)</span>
+          </label>
+
+          <label class="flex items-center gap-2 text-xs text-teal-900 cursor-pointer select-none">
+            <input type="checkbox" id="checkPrePoo" class="rounded text-teal-600 focus:ring-teal-500 w-4 h-4">
+            <span>Fiz <strong>Pré-Poo</strong> nas pontas antes de lavar (proteção contra ressecamento)</span>
+          </label>
+
+          <label class="flex items-center gap-2 text-xs text-teal-900 cursor-pointer select-none">
+            <input type="checkbox" id="checkAcidifier" class="rounded text-teal-600 focus:ring-teal-500 w-4 h-4">
+            <span>Usei <strong>Acidificante</strong> para selar as cutículas e dar brilho</span>
+          </label>
+        </div>
+
+        <!-- Produtos Usados -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Produtos Utilizados</label>
+          <input type="text" id="inputProductsUsed" placeholder="Ex: Shampoo Dercos + Máscara Lola Ghee + Yamasterol pré-poo" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <!-- Sensação do Fio -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Como o cabelo ficou após secar?</label>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <label class="cursor-pointer">
+              <input type="radio" name="hairFeeling" value="Macio & Definido" checked class="hidden peer">
+              <div class="p-2 border rounded-xl text-center peer-checked:bg-emerald-50 peer-checked:border-emerald-500 peer-checked:text-emerald-800 transition">
+                ✨ Macio & Definido
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="hairFeeling" value="Ainda Áspero" class="hidden peer">
+              <div class="p-2 border rounded-xl text-center peer-checked:bg-amber-50 peer-checked:border-amber-500 peer-checked:text-amber-800 transition">
+                🌾 Ainda Áspero
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="hairFeeling" value="Pesou / Oleoso" class="hidden peer">
+              <div class="p-2 border rounded-xl text-center peer-checked:bg-rose-50 peer-checked:border-rose-500 peer-checked:text-rose-800 transition">
+                💧 Pesou / Oleoso
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Notas / Observações -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Notas adicionais (opcional)</label>
+          <textarea id="inputCareNotes" rows="2" placeholder="Ex: Deixei a máscara agir por 5 min. Couro cabeludo bem calmo sem coceira." class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="button" class="btnCloseModal flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-50 transition">
+            Cancelar
+          </button>
+          <button type="submit" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold shadow-md shadow-brand-500/20 transition">
+            Salvar Cuidado
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ADICIONAR PRODUTO ================= -->
+  <div id="modalAddProduct" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <h3 class="font-bold text-base text-slate-900">Novo Produto no Armário</h3>
+        <button class="btnCloseProductModal text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="formAddProduct" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Nome do Produto</label>
+          <input type="text" id="inputProductName" required placeholder="Ex: Lola Be(M)dita Ghee Banana" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Marca</label>
+          <input type="text" id="inputProductBrand" placeholder="Ex: Lola Cosmetics / Vichy / Salon Line" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Categoria Principal</label>
+          <select id="inputProductCategory" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <option value="hidratação">Hidratação (H)</option>
+            <option value="nutrição">Nutrição Leve (N)</option>
+            <option value="reconstrução">Reconstrução (R)</option>
+            <option value="dermatite">Shampoo Dermatite / Anticaspa</option>
+            <option value="pre-poo">Pré-Poo Protetor</option>
+            <option value="acidificante">Acidificante Selador</option>
+            <option value="finalizador">Leave-in / Finalizador / Óleo</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Observações (Como usar / Textura)</label>
+          <input type="text" id="inputProductNotes" placeholder="Ex: Textura leve, não pesa no fio fino" class="w-full text-xs p-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button type="button" class="btnCloseProductModal flex-1 px-3 py-2 rounded-xl border border-slate-200 text-slate-700 text-xs font-medium hover:bg-slate-50">
+            Cancelar
+          </button>
+          <button type="submit" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white px-3 py-2 rounded-xl text-xs font-semibold transition">
+            Cadastrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none text-xs">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toastMessage">Operação realizada com sucesso!</span>
+  </div>
+
+  <footer class="mt-auto py-6 text-center text-xs text-slate-400 border-t border-slate-200/60 bg-white/50">
+    <p>CapilarFlow • Desenvolvido para Cabelos 2C/3A Fio Fino & Scalp Care</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
