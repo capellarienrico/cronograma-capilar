@@ -787,34 +787,166 @@ function showToast(msg) {
 // ================= GUIA DE PRODUTOS & ANALISADOR =================
 
 const RECOMMENDED_MARKET_PRODUCTS = [
-  // --- TIER 1: BARATINHOS (ATÉ R$ 25) ---
+  // ================= 1. DERMATITE / COURO CABELUDO =================
+  // Baratinho
   {
     id: 'rec_ceto_gen',
     name: 'Shampoo Cetoconazol 2%',
-    brand: 'Genérico (Medley / EMS)',
+    brand: 'Genérico (Medley / EMS / Neo Química)',
     category: 'dermatite',
     budget: 'baratinho',
     price: '~ R$ 15 - 20',
-    why: 'Tratamento antifúngico clínico mais acessível e eficaz contra a descamação da dermatite.'
+    why: 'Antifúngico clínico essencial para conter a proliferação da caspa e coceira no couro cabeludo.'
   },
   {
-    id: 'rec_yamasterol',
+    id: 'rec_clear_men',
+    name: 'Shampoo Clear Limpeza Diária 2 em 1',
+    brand: 'Clear Anticaspa',
+    category: 'dermatite',
+    budget: 'baratinho',
+    price: '~ R$ 18 - 22',
+    why: 'Com Piritionato de Zinco. Boa opção de supermercado para alternar durante a semana.'
+  },
+  // Custo-Benefício
+  {
+    id: 'rec_head_clinical',
+    name: 'Shampoo Clinical Solutions (Sulfeto de Selênio)',
+    brand: 'Head & Shoulders',
+    category: 'dermatite',
+    budget: 'custo-beneficio',
+    price: '~ R$ 38 - 46',
+    why: 'Sulfeto de selênio a 1%: alívio muito rápido para crises de descamação e vermelhidão.'
+  },
+  {
+    id: 'rec_pielus_di',
+    name: 'Shampoo Pielus DI Anticaspa Intensa',
+    brand: 'TheraSkin',
+    category: 'dermatite',
+    budget: 'custo-beneficio',
+    price: '~ R$ 55 - 65',
+    why: 'Contém Ciclopirox Olamina e Ácido Salicílico. Limpa profundamente sem arder o couro sensível.'
+  },
+  {
+    id: 'rec_doctar_plus',
+    name: 'Shampoo Doctar Plus Anticaspa',
+    brand: 'Darrow Dermocosméticos',
+    category: 'dermatite',
+    budget: 'custo-beneficio',
+    price: '~ R$ 56 - 68',
+    why: 'Altamente recomendado por dermatologistas para dermatite oleosa. Acalma a coceira na primeira lavagem.'
+  },
+  // Profissional / Dermocosmético
+  {
+    id: 'rec_dercos_ds',
+    name: 'Dercos Anticaspa DS (Couro Oleoso)',
+    brand: 'Vichy Laboratoires',
+    category: 'dermatite',
+    budget: 'premium',
+    price: '~ R$ 90 - 115',
+    why: 'Padrão ouro dermatológico. Eficácia comprovada contra o fungo Malassezia com ação antiquebra.'
+  },
+  {
+    id: 'rec_kelual_ds',
+    name: 'Kelual DS Shampoo Tratante Redutor',
+    brand: 'Ducray Laboratórios',
+    category: 'dermatite',
+    budget: 'premium',
+    price: '~ R$ 85 - 105',
+    why: 'Fórmula francesa com Ciclopiroxolamina e Piritionato de Zinco. Muito seguro e duradouro.'
+  },
+
+  // ================= 2. PRÉ-POO & PROTEÇÃO DE PONTAS =================
+  // Baratinho
+  {
+    id: 'rec_yamasterol_amarelo',
     name: 'Yamasterol Amarelo (Babosa & D-Pantenol)',
     brand: 'Yamá Cosméticos',
     category: 'pre-poo',
     budget: 'baratinho',
-    price: '~ R$ 8 - 14 (900g)',
-    why: 'O melhor custo-benefício para Pré-Poo. Fórmula fluida, solúvel em água, protege as pontas finas sem pesar.'
+    price: '~ R$ 10 - 14 (900g)',
+    why: 'O pré-poo indispensável! Fórmula super fluida, protege as pontas finas sem acumular resíduo.'
   },
   {
+    id: 'rec_yamasterol_branco',
+    name: 'Yamasterol Branco (Proteína de Soja)',
+    brand: 'Yamá Cosméticos',
+    category: 'pre-poo',
+    budget: 'baratinho',
+    price: '~ R$ 10 - 14 (900g)',
+    why: 'Alternativa com aminoácidos leves. Excelente para proteger pontas mais fragilizadas.'
+  },
+  // Custo-Benefício
+  {
+    id: 'rec_lola_cacho_cond',
+    name: 'Condicionador Meu Cacho Minha Vida',
+    brand: 'Lola Cosmetics',
+    category: 'pre-poo',
+    budget: 'custo-beneficio',
+    price: '~ R$ 28 - 35',
+    why: 'Multifuncional leve com óleo de patauá. Ótimo para envelopar os fios antes do banho.'
+  },
+  {
+    id: 'rec_apse_oleo_pre',
+    name: 'Óleo Vegetal Puro de Semente de Uva',
+    brand: 'Apse / Farmax 100% Puro',
+    category: 'pre-poo',
+    budget: 'custo-beneficio',
+    price: '~ R$ 20 - 28',
+    why: 'Óleo finíssimo. Aplique 4 a 6 gotas apenas nas pontinhas 15 minutos antes de lavar com anticaspa.'
+  },
+
+  // ================= 3. SHAMPOOS DIÁRIOS / MANUTENÇÃO =================
+  // Baratinho
+  {
     id: 'rec_pantene_micelar',
-    name: 'Shampoo Pantene Pro-V Micelar Purifica',
+    name: 'Shampoo Pantene Micelar Purifica & Hidrata',
     brand: 'Pantene',
     category: 'shampoo-neutro',
     budget: 'baratinho',
     price: '~ R$ 18 - 22',
-    why: 'Shampoo transparente que limpa a raiz oleosa diariamente sem agredir as pontas secas.'
+    why: 'Shampoo transparente de limpeza suave. Não resseca o comprimento nos dias sem remédio.'
   },
+  {
+    id: 'rec_dove_plantas',
+    name: 'Shampoo Dove Poder das Plantas Purificação',
+    brand: 'Dove',
+    category: 'shampoo-neutro',
+    budget: 'baratinho',
+    price: '~ R$ 20 - 25',
+    why: '97% de ingredientes de origem natural, com óleo de melaleuca e sem sulfatos fortes.'
+  },
+  // Custo-Benefício
+  {
+    id: 'rec_lola_camomila',
+    name: 'Shampoo Suave Iluminador Camomila',
+    brand: 'Lola Cosmetics',
+    category: 'shampoo-neutro',
+    budget: 'custo-beneficio',
+    price: '~ R$ 28 - 34',
+    why: 'Fórmula muito delicada com óleo essencial de limão e camomila. Ótimo para raiz mista.'
+  },
+  {
+    id: 'rec_haskell_alecrim',
+    name: 'Shampoo Purificante Alecrim & Menta',
+    brand: 'Haskell',
+    category: 'shampoo-neutro',
+    budget: 'custo-beneficio',
+    price: '~ R$ 32 - 40',
+    why: 'Ação refrescante e antioleosidade suave para quem lava a cabeça todos os dias.'
+  },
+  // Profissional
+  {
+    id: 'rec_wella_aqua_pure',
+    name: 'Shampoo Invigo Aqua Pure Purifying',
+    brand: 'Wella Professionals',
+    category: 'shampoo-neutro',
+    budget: 'premium',
+    price: '~ R$ 85 - 105',
+    why: 'Limpeza profissional purificante com extrato de lótus. Fios soltos e leves o dia todo.'
+  },
+
+  // ================= 4. HIDRATAÇÃO (H) =================
+  // Baratinho
   {
     id: 'rec_skala_babosa',
     name: 'Skala Expert Babosa (Aloe Vera)',
@@ -822,37 +954,27 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     category: 'hidratação',
     budget: 'baratinho',
     price: '~ R$ 10 - 13 (1kg)',
-    why: 'Fórmula muito líquida e levinha. Absorção imediata para baixa porosidade sem causar acúmulo.'
+    why: 'Super fluida e aquosa. Penetra nas cutículas fechadas da baixa porosidade sem pesar.'
   },
   {
-    id: 'rec_skala_argan',
-    name: 'Skala Expert Óleo de Argan',
-    brand: 'Skala Cosméticos',
-    category: 'nutrição',
-    budget: 'baratinho',
-    price: '~ R$ 10 - 13 (1kg)',
-    why: 'Nutrição suave com óleo leve. Não pesa no cacho 2C/3A fino se enxaguar bem.'
-  },
-  {
-    id: 'rec_gelatina_verde',
-    name: 'Gelatina Não Sai da Minha Cabeça',
-    brand: 'Salon Line',
-    category: 'finalizador',
+    id: 'rec_seda_boom_h',
+    name: 'Máscara Seda Boom Hidratação Profunda',
+    brand: 'Seda',
+    category: 'hidratação',
     budget: 'baratinho',
     price: '~ R$ 16 - 20',
-    why: 'Fixação e definição para 2C/3A sem peso nenhum de óleos pesados. Deixa os cachos soltos e brilhantes.'
+    why: 'Contém D-Pantenol e Babosa. Textura leve em creme fácil de enxaguar.'
   },
-
-  // --- TIER 2: CUSTO-BENEFÍCIO / INTERMEDIÁRIO (R$ 30 - 55) ---
   {
-    id: 'rec_head_clinical',
-    name: 'Shampoo Head & Shoulders Clinical Solutions',
-    brand: 'Head & Shoulders',
-    category: 'dermatite',
-    budget: 'custo-beneficio',
-    price: '~ R$ 38 - 45',
-    why: 'Com sulfeto de selênio. Alívio rápido da coceira e caspa persistente sem ressecar tanto quanto outros.'
+    id: 'rec_salonline_babosa',
+    name: 'Máscara Tô de Cacho Babosa & Alecrim',
+    brand: 'Salon Line',
+    category: 'hidratação',
+    budget: 'baratinho',
+    price: '~ R$ 18 - 24',
+    why: 'Efeito desmaia-cabelo com textura aquosa, excelente desembaraço para 2C/3A.'
   },
+  // Custo-Benefício
   {
     id: 'rec_ghee_banana',
     name: 'Be(M)dita Ghee Banana & Aloe Vera',
@@ -860,8 +982,58 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     category: 'hidratação',
     budget: 'custo-beneficio',
     price: '~ R$ 35 - 45',
-    why: 'Consistência em emulsão aquosa perfeita. Devolve água e maleabilidade sem plastificar o fio de baixa porosidade.'
+    why: 'Emulsão cremosa-aquosa botânica. Devolve água e maleabilidade sem plastificar o fio fino.'
   },
+  {
+    id: 'rec_haskell_mandioca',
+    name: 'Máscara Mandioca Hidratação & Força',
+    brand: 'Haskell',
+    category: 'hidratação',
+    budget: 'custo-beneficio',
+    price: '~ R$ 34 - 42',
+    why: 'Clássico para desembaraço e maciez. Fórmula rica em vitaminas que penetra rápido.'
+  },
+  // Profissional
+  {
+    id: 'rec_wella_reboost',
+    name: 'Oil Reflections Luminous Reboost Máscara',
+    brand: 'Wella Professionals',
+    category: 'hidratação',
+    budget: 'premium',
+    price: '~ R$ 120 - 145',
+    why: 'Tecnologia profissional de reflexo de luz e pantenol puro. Maciez e toque de salão.'
+  },
+  {
+    id: 'rec_senscience_inner',
+    name: 'Inner Restore Deep Moisturizing Mask',
+    brand: 'Senscience',
+    category: 'hidratação',
+    budget: 'premium',
+    price: '~ R$ 130 - 165',
+    why: 'Hidratação profunda sem silicone pesado. Transforma o toque áspero em sedosidade.'
+  },
+
+  // ================= 5. NUTRIÇÃO LEVE (N) =================
+  // Baratinho
+  {
+    id: 'rec_maria_natureza',
+    name: 'Máscara Maria Natureza Óleos Milenares',
+    brand: 'Salon Line',
+    category: 'nutrição',
+    budget: 'baratinho',
+    price: '~ R$ 22 - 28',
+    why: 'Óleo de argan e semente de uva. Proporciona brilho e alinhamento sem pesar no cacho.'
+  },
+  {
+    id: 'rec_skala_argan',
+    name: 'Skala Expert Óleo de Argan do Marrocos',
+    brand: 'Skala Cosméticos',
+    category: 'nutrição',
+    budget: 'baratinho',
+    price: '~ R$ 10 - 13 (1kg)',
+    why: 'Opção de nutrição acessível e suave. Ideal para quem lava com frequência.'
+  },
+  // Custo-Benefício
   {
     id: 'rec_danos_booster',
     name: 'Booster Máscara Líquida Danos Vorazes',
@@ -869,8 +1041,90 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     category: 'nutrição',
     budget: 'custo-beneficio',
     price: '~ R$ 38 - 48',
-    why: 'Líquida que vira creme instantâneo no banho. Dá brilho espelhado e alinhamento em 10 segundos sem murchar o cacho fino.'
+    why: 'O melhor produto para o seu cabelo: líquida que vira creme. Dá brilho espelhado sem murchar o fio.'
   },
+  {
+    id: 'rec_haskell_murumuru',
+    name: 'Máscara Manteiga de Murumuru Nutritiva',
+    brand: 'Haskell',
+    category: 'nutrição',
+    budget: 'custo-beneficio',
+    price: '~ R$ 36 - 45',
+    why: 'Nutrição lipídica intensa. Use apenas uma moeda de 1 real no comprimento para não pesar.'
+  },
+  // Profissional
+  {
+    id: 'rec_loreal_absolut',
+    name: 'Absolut Repair Gold Quinoa & Proteína',
+    brand: "L'Oréal Professionnel",
+    category: 'nutrição',
+    budget: 'premium',
+    price: '~ R$ 130 - 155',
+    why: 'Versão Gold Quinoa deixa toque leve, reduz o frizz e devolve luminosidade instantânea.'
+  },
+
+  // ================= 6. RECONSTRUÇÃO (R) =================
+  // Baratinho
+  {
+    id: 'rec_haskell_queratina',
+    name: 'Carga de Queratina Líquida Concentrada',
+    brand: 'Haskell',
+    category: 'reconstrução',
+    budget: 'baratinho',
+    price: '~ R$ 22 - 28',
+    why: 'Queratina líquida pura. Borrife no comprimento e pause 10 min (usar apenas 1x ao mês!).'
+  },
+  {
+    id: 'rec_skala_caju',
+    name: 'Skala Caju e Murumuru Reconstrução',
+    brand: 'Skala Cosméticos',
+    category: 'reconstrução',
+    budget: 'baratinho',
+    price: '~ R$ 10 - 13',
+    why: 'Reconstrução bem branda, segura para não enrijecer fios de baixa porosidade.'
+  },
+  // Custo-Benefício
+  {
+    id: 'rec_tarja_preta',
+    name: 'Máscara Tarja Preta Queratina Vegetal',
+    brand: 'Lola Cosmetics',
+    category: 'reconstrução',
+    budget: 'custo-beneficio',
+    price: '~ R$ 35 - 45',
+    why: 'Aminoácidos vegetais biodisponíveis. Fortalece o fio sem provocar efeito de rigidez.'
+  },
+  {
+    id: 'rec_amend_cauter',
+    name: 'Máscara Cauterização Reconstrutora',
+    brand: 'Amend',
+    category: 'reconstrução',
+    budget: 'custo-beneficio',
+    price: '~ R$ 42 - 52',
+    why: 'Ação rápida na fibra capilar, recuperando a textura macia das pontas secas.'
+  },
+  // Profissional
+  {
+    id: 'rec_lowell_bioplastia',
+    name: 'Bioplastia Creme Reconstrutor de Fios',
+    brand: 'Lowell Profissional',
+    category: 'reconstrução',
+    budget: 'premium',
+    price: '~ R$ 85 - 110',
+    why: 'Reconstrói a massa capilar em apenas 3 minutos, mantendo a maleabilidade do cacho fino.'
+  },
+
+  // ================= 7. ACIDIFICANTE (SELADOR DE CUTÍCULAS) =================
+  // Baratinho
+  {
+    id: 'rec_vinagre_maca',
+    name: 'Acidificação Caseira com Vinagre de Maçã',
+    brand: 'Receita Natural Equilibrada',
+    category: 'acidificante',
+    budget: 'baratinho',
+    price: '~ R$ 10 - 14',
+    why: 'Misture 25ml de vinagre de maçã em 200ml de água filtrada. Borrife após o shampoo por 3 min e enxágue.'
+  },
+  // Custo-Benefício
   {
     id: 'rec_acidificante_lola',
     name: 'Acidificante Densidade pH 3.0',
@@ -878,17 +1132,49 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     category: 'acidificante',
     budget: 'custo-beneficio',
     price: '~ R$ 36 - 45',
-    why: 'Produto chave para o seu cabelo: sela as cutículas, acaba com a aspereza e desembaraça feito seda.'
+    why: 'O melhor acidificante nacional! Desembaraça na hora, sela as escamas e dá brilho espelhado.'
   },
   {
-    id: 'rec_tarja_preta',
-    name: 'Máscara Restauradora Tarja Preta (Vegetal)',
-    brand: 'Lola Cosmetics',
-    category: 'reconstrução',
+    id: 'rec_widi_infusao',
+    name: 'Acidificante Infusão 2.0 pH 3.0',
+    brand: 'Widi Care',
+    category: 'acidificante',
     budget: 'custo-beneficio',
-    price: '~ R$ 35 - 45',
-    why: 'Aminoácidos na medida certa. Seguro para baixa porosidade na aplicação mensal.'
+    price: '~ R$ 45 - 55',
+    why: 'Com vinagre de maçã e extratos florais. Deixa o fio com toque acetinado imediato.'
   },
+  // Profissional
+  {
+    id: 'rec_kpro_balancer',
+    name: 'pH Balancer Acidificante Profissional (pH 2.5)',
+    brand: 'K.Pro',
+    category: 'acidificante',
+    budget: 'premium',
+    price: '~ R$ 75 - 90',
+    why: 'O acidificante de salão mais premiado do Brasil. Fecha totalmente as cutículas e alinha as ondas.'
+  },
+
+  // ================= 8. FINALIZADORES / LEAVE-IN =================
+  // Baratinho
+  {
+    id: 'rec_gelatina_verde',
+    name: 'Gelatina Não Sai da Minha Cabeça',
+    brand: 'Salon Line',
+    category: 'finalizador',
+    budget: 'baratinho',
+    price: '~ R$ 16 - 20',
+    why: 'Fixação perfeita e leve para 2C/3A. Cachos definidos o dia todo sem resíduo esbranquiçado.'
+  },
+  {
+    id: 'rec_seda_geleia',
+    name: 'Geleia Modeladora Seda Boom Leve',
+    brand: 'Seda',
+    category: 'finalizador',
+    budget: 'baratinho',
+    price: '~ R$ 16 - 22',
+    why: 'Modela sem endurecer o cacho, mantendo o movimento natural do fio fino.'
+  },
+  // Custo-Benefício
   {
     id: 'rec_jelly_lola',
     name: 'Meu Cacho Minha Vida Jelly Gel',
@@ -896,37 +1182,18 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     category: 'finalizador',
     budget: 'custo-beneficio',
     price: '~ R$ 28 - 35',
-    why: 'Gel hidratante com quinoa e patauá. Define ondas 2C e cachos 3A com aspecto natural e sem frizz.'
-  },
-
-  // --- TIER 3: PROFISSIONAL / SALÃO (R$ 70+) ---
-  {
-    id: 'rec_dercos',
-    name: 'Dercos Anticaspa DS (Cabelos Oleosos)',
-    brand: 'Vichy Laboratoires',
-    category: 'dermatite',
-    budget: 'premium',
-    price: '~ R$ 90 - 115',
-    why: 'Referência dermatológica mundial. Tecnologia com Selênio DS e Ácido Salicílico que trata o couro sem arder.'
+    why: 'Gel hidratante suave com quinoa. Define sem aspecto molhado ou pesado.'
   },
   {
-    id: 'rec_wella_reboost',
-    name: 'Máscara Oil Reflections Luminous Reboost',
-    brand: 'Wella Professionals',
-    category: 'hidratação',
-    budget: 'premium',
-    price: '~ R$ 120 - 145',
-    why: 'Máscara luxuosa com pantenol e óleo de semente de camélia. Ilumina os fios instantaneamente com toque suave.'
+    id: 'rec_haskell_encorpa_spray',
+    name: 'Fluido Encorpa Cabelo em Spray',
+    brand: 'Haskell',
+    category: 'finalizador',
+    budget: 'custo-beneficio',
+    price: '~ R$ 36 - 44',
+    why: 'Com ácido hialurônico e physalis: dá mais corpo e densidade aos fios finos sem pesar.'
   },
-  {
-    id: 'rec_kpro_acidificante',
-    name: 'pH Balancer Acidificante Profissional',
-    brand: 'K.Pro',
-    category: 'acidificante',
-    budget: 'premium',
-    price: '~ R$ 75 - 90',
-    why: 'O acidificante mais usado em salões. Fecha as escamas da fibra capilar na hora, gerando maciez imediata.'
-  },
+  // Profissional
   {
     id: 'rec_oil_light',
     name: 'Oil Reflections Luminous Light (Fio Fino)',
@@ -934,22 +1201,46 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     category: 'finalizador',
     budget: 'premium',
     price: '~ R$ 85 - 110',
-    why: 'A versão "Light" foi criada especificamente para cabelos finos. Não pesa nem engordura as pontas.'
+    why: 'A versão "Light" foi criada especialmente para fios finos. Brilho luxuoso com toque seco.'
+  },
+  {
+    id: 'rec_moroccanoil_light',
+    name: 'Óleo de Tratamento Moroccanoil Light',
+    brand: 'Moroccanoil',
+    category: 'finalizador',
+    budget: 'premium',
+    price: '~ R$ 115 - 145',
+    why: 'Fórmula refinada mais clara e fluida para cabelos finos que precisam de disciplina e brilho.'
   }
 ];
 
 let currentBudgetFilter = 'all';
+let currentCatFilter = 'all';
 
-function renderRecommendedCatalogue(filterBudget = 'all') {
+function renderRecommendedCatalogue(filterBudget = currentBudgetFilter, filterCat = currentCatFilter) {
   currentBudgetFilter = filterBudget;
+  currentCatFilter = filterCat;
+  
   const container = document.getElementById('recommendedCatalogue');
   if (!container) return;
 
-  const filtered = filterBudget === 'all'
-    ? RECOMMENDED_MARKET_PRODUCTS
-    : RECOMMENDED_MARKET_PRODUCTS.filter(p => p.budget === filterBudget);
+  const filtered = RECOMMENDED_MARKET_PRODUCTS.filter(p => {
+    const matchBudget = (currentBudgetFilter === 'all' || p.budget === currentBudgetFilter);
+    const matchCat = (currentCatFilter === 'all' || p.category === currentCatFilter);
+    return matchBudget && matchCat;
+  });
 
   container.innerHTML = '';
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full py-8 text-center text-xs text-slate-400">
+        Nenhum produto encontrado com este filtro de preço e etapa.
+      </div>
+    `;
+    return;
+  }
+
   filtered.forEach(item => {
     const isAlreadyInShelf = appState.products.some(p => p.name.toLowerCase() === item.name.toLowerCase());
 
@@ -1022,7 +1313,16 @@ function renderRecommendedCatalogue(filterBudget = 'all') {
     btn.onclick = () => {
       document.querySelectorAll('.budget-filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      renderRecommendedCatalogue(btn.dataset.budget);
+      renderRecommendedCatalogue(btn.dataset.budget, currentCatFilter);
+    };
+  });
+
+  // Atualizar botões de filtro de categoria
+  document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRecommendedCatalogue(currentBudgetFilter, btn.dataset.stepcat);
     };
   });
 

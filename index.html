@@ -524,20 +524,35 @@
           <div>
             <h3 class="font-bold text-base text-slate-900 flex items-center gap-2">
               <i data-lucide="sparkles" class="w-5 h-5 text-emerald-600"></i>
-              Kits Sugeridos por Faixa de Preço
+              Kits Sugeridos por Faixa de Preço & Categoria
             </h3>
             <p class="text-xs text-slate-500">
-              Produtos filtrados sob medida para <strong>2C/3A Fio Fino + Baixa Porosidade + Dermatite</strong>.
+              Múltiplas alternativas selecionadas para <strong>2C/3A Fio Fino + Baixa Porosidade + Dermatite</strong>.
             </p>
           </div>
 
           <!-- Filtros de Faixa de Preço -->
           <div class="flex items-center gap-1.5 flex-wrap text-xs">
+            <span class="text-[11px] font-bold text-slate-400 mr-1">Preço:</span>
             <button class="budget-filter-btn active" data-budget="all">Todos</button>
             <button class="budget-filter-btn" data-budget="baratinho">🟢 Baratinhos (Até R$ 25)</button>
-            <button class="budget-filter-btn" data-budget="custo-beneficio">🟡 Custo-Benefício (R$ 30 - 50)</button>
+            <button class="budget-filter-btn" data-budget="custo-beneficio">🟡 Custo-Benefício (R$ 30 - 55)</button>
             <button class="budget-filter-btn" data-budget="premium">🟣 Profissional (R$ 70+)</button>
           </div>
+        </div>
+
+        <!-- Filtros Rápidos por Categoria da Vitrine -->
+        <div class="flex items-center gap-1.5 flex-wrap text-xs pt-2 border-t border-slate-100">
+          <span class="text-[11px] font-bold text-slate-400 mr-1">Etapa:</span>
+          <button class="cat-filter-btn active" data-stepcat="all">Todas as Etapas</button>
+          <button class="cat-filter-btn" data-stepcat="dermatite">Dermatite</button>
+          <button class="cat-filter-btn" data-stepcat="pre-poo">Pré-Poo</button>
+          <button class="cat-filter-btn" data-stepcat="shampoo-neutro">Shampoo Diário</button>
+          <button class="cat-filter-btn" data-stepcat="hidratação">Hidratação (H)</button>
+          <button class="cat-filter-btn" data-stepcat="nutrição">Nutrição (N)</button>
+          <button class="cat-filter-btn" data-stepcat="reconstrução">Reconstrução (R)</button>
+          <button class="cat-filter-btn" data-stepcat="acidificante">Acidificante</button>
+          <button class="cat-filter-btn" data-stepcat="finalizador">Finalizador</button>
         </div>
 
         <div id="recommendedCatalogue" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">

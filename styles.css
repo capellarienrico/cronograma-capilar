@@ -114,6 +114,29 @@
   color: #ffffff;
 }
 
+/* Category filter buttons in catalogue */
+.cat-filter-btn {
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.cat-filter-btn:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.cat-filter-btn.active {
+  background-color: #1e293b;
+  border-color: #1e293b;
+  color: #ffffff;
+}
+
 /* Week Step Cards */
 .step-item {
   position: relative;
