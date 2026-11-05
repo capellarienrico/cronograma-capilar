@@ -627,6 +627,20 @@ function renderProducts(filterCat = 'all') {
         <h4 class="font-bold text-sm text-slate-900 leading-snug">${p.name}</h4>
         <span class="text-xs text-slate-500 block">${p.brand}</span>
         ${p.notes ? `<p class="text-xs text-slate-600 mt-2 bg-slate-50 p-2 rounded-lg border border-slate-100">${p.notes}</p>` : ''}
+
+        <!-- Busca de Preço / Reposição do produto do Armário -->
+        <div class="pt-2 mt-2 border-t border-slate-100 flex items-center gap-1.5 flex-wrap">
+          <a 
+            href="https://www.google.com/search?tbm=shop&q=${encodeURIComponent(p.brand + ' ' + p.name)}" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-1 text-[10px] text-slate-600 hover:text-emerald-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md font-medium transition"
+            title="Comparar preços atuais"
+          >
+            <i data-lucide="search" class="w-3 h-3 text-slate-400"></i>
+            Comparar Preços
+          </a>
+        </div>
       </div>
     `;
 
@@ -960,6 +974,30 @@ function renderRecommendedCatalogue(filterBudget = 'all') {
           <span class="font-bold text-emerald-800 bg-emerald-100/60 px-1.5 py-0.2 rounded">${item.price}</span>
         </div>
         <p class="text-[11px] text-slate-600 leading-relaxed">${item.why}</p>
+
+        <!-- Busca de Preço em Tempo Real -->
+        <div class="pt-2 mt-2 border-t border-slate-200/60 flex items-center gap-1.5 flex-wrap">
+          <a 
+            href="https://www.google.com/search?tbm=shop&q=${encodeURIComponent(item.brand + ' ' + item.name)}" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-1 text-[10px] text-slate-600 hover:text-emerald-700 bg-white hover:bg-slate-100 border border-slate-200 px-2 py-0.8 rounded-md font-medium transition"
+            title="Ver preços em tempo real no Google Shopping"
+          >
+            <i data-lucide="search" class="w-3 h-3 text-slate-400"></i>
+            Google Shopping
+          </a>
+          <a 
+            href="https://lista.mercadolivre.com.br/${encodeURIComponent(item.brand + ' ' + item.name)}" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-1 text-[10px] text-slate-600 hover:text-amber-700 bg-white hover:bg-slate-100 border border-slate-200 px-2 py-0.8 rounded-md font-medium transition"
+            title="Ver no Mercado Livre"
+          >
+            <i data-lucide="external-link" class="w-3 h-3 text-amber-500"></i>
+            Mercado Livre
+          </a>
+        </div>
       </div>
 
       <button 
