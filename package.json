@@ -1,0 +1,34 @@
+{
+  "name": "capilarflow",
+  "version": "1.0.0",
+  "description": "CapilarFlow - Cronograma Capilar & Scalp Care",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build.js",
+    "cap:add:android": "npm run build && npx cap add android",
+    "cap:sync": "npm run build && npx cap sync android",
+    "cap:open": "npx cap open android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capellarienrico/cronograma-capilar.git"
+  },
+  "keywords": [
+    "cronograma-capilar",
+    "scalp-care",
+    "pwa",
+    "capacitor",
+    "android",
+    "apk"
+  ],
+  "author": "capellarienrico",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/android": "^7.0.1",
+    "@capacitor/core": "^7.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.1"
+  }
+}

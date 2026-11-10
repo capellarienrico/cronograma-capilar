@@ -1,0 +1,12 @@
+{
+  "appId": "com.capellarienrico.capilarflow",
+  "appName": "CapilarFlow",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#bf3b54",
+    "allowMixedContent": true
+  }
+}

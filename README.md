@@ -43,10 +43,24 @@ abrir-app.bat
 ```
 Ou abrir o arquivo `index.html` em qualquer navegador.
 
-### No Celular (Rede Local)
+### No Celular (Rede Local - PWA)
 1. Dê dois cliques no arquivo `abrir-no-celular.bat`.
 2. Abra o endereço exibido no navegador do seu smartphone Android.
 3. Toque em **"Instalar App"** para adicionar à tela inicial.
+
+### 📱 Como APK Nativo (Android)
+O projeto conta com integração nativa via **Capacitor** e pipeline automatizado no **GitHub Actions**:
+1. Acesse a aba **Actions** no repositório do GitHub ou a seção **Releases**.
+2. Baixe o arquivo **`CapilarFlow.apk`**.
+3. Transfira para o seu dispositivo Android e instale diretamente.
+
+#### Gerar APK Localmente:
+```bash
+npm run build
+npx cap sync android
+cd android && ./gradlew assembleDebug
+```
+O APK gerado ficará em `android/app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
