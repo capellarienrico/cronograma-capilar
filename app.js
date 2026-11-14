@@ -6,68 +6,68 @@ const STORAGE_KEY = 'capilarflow_app_data_v1';
 // Cronogramas de acordo com a porosidade
 const SCHEDULE_TEMPLATES = {
   alta: [
-    { week: 1, step: 1, type: 'Hidratação', desc: 'Reposição hídrica com máscara fluida (babosa/pantenol)' },
-    { week: 1, step: 2, type: 'Nutrição', desc: 'Reposição de óleos leves (argan/semente de uva) para combater o frizz' },
-    { week: 1, step: 3, type: 'Hidratação', desc: 'Reforço de umidade e maleabilidade' },
+    { week: 1, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing (hidratação pura sem pesar) + Finalize c/ Lowell Bioplastia' },
+    { week: 1, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost (nutrição luminosa) + 2 gotas de Oil Reflections Light' },
+    { week: 1, step: 3, type: 'Hidratação', desc: 'Wella Elements Renewing + Pré-Poo com Óleo Semente de Uva Farmax' },
     
-    { week: 2, step: 1, type: 'Hidratação', desc: 'Hidratação profunda sem pesar no fio fino' },
-    { week: 2, step: 2, type: 'Nutrição', desc: 'Nutrição leve para alinhar e devolver o brilho espelhado' },
-    { week: 2, step: 3, type: 'Reconstrução', desc: 'Queratina suave/aminoácidos + Dica: use Acidificante antes!' },
+    { week: 2, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Toque de Acidificante K.Pro pós-lavagem' },
+    { week: 2, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost (pausa de 5 min) + Touca de Cetim à noite' },
+    { week: 2, step: 3, type: 'Reconstrução', desc: 'L\'Oréal Absolut Repair Gold Quinoa + Dica: K.Pro pH Balancer antes para selar' },
     
-    { week: 3, step: 1, type: 'Hidratação', desc: 'Desembaraço e emoliência' },
-    { week: 3, step: 2, type: 'Nutrição', desc: 'Nutrição para manter a definição do cacho 2C/3A' },
-    { week: 3, step: 3, type: 'Hidratação', desc: 'Selagem leve e maciez' },
+    { week: 3, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Desembaraço suave e secagem com Toalha de Microfibra' },
+    { week: 3, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost para definição do cacho 2C/3A' },
+    { week: 3, step: 3, type: 'Hidratação', desc: 'Wella Elements Renewing + Pré-poo com Óleo de Semente de Uva Farmax' },
     
-    { week: 4, step: 1, type: 'Nutrição', desc: 'Nutrição suave' },
-    { week: 4, step: 2, type: 'Hidratação', desc: 'Hidratação intensa' },
-    { week: 4, step: 3, type: 'Reconstrução', desc: 'Fortalecimento da fibra + Acidificação para fechar cutículas' },
+    { week: 4, step: 1, type: 'Nutrição', desc: 'Nutrição ou Umectação com Óleo de Semente de Uva Farmax + Wella Reboost' },
+    { week: 4, step: 2, type: 'Hidratação', desc: 'Wella Elements Renewing para reposição hídrica profunda' },
+    { week: 4, step: 3, type: 'Reconstrução', desc: 'L\'Oréal Absolut Repair Gold Quinoa + K.Pro pH Balancer para cutículas blindadas' },
   ],
   media: [
-    { week: 1, step: 1, type: 'Hidratação', desc: 'Reposição hídrica' },
-    { week: 1, step: 2, type: 'Nutrição', desc: 'Nutrição com óleos vegetais leves' },
-    { week: 1, step: 3, type: 'Hidratação', desc: 'Manutenção de maciez' },
+    { week: 1, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing (reposição hídrica botânica sem pesar)' },
+    { week: 1, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost + Óleo Light nas pontas' },
+    { week: 1, step: 3, type: 'Hidratação', desc: 'Wella Elements Renewing + Leave-in Lowell Bioplastia' },
     
-    { week: 2, step: 1, type: 'Hidratação', desc: 'Hidratação com foco em desembaraço' },
-    { week: 2, step: 2, type: 'Hidratação', desc: 'Hidratação leve' },
-    { week: 2, step: 3, type: 'Nutrição', desc: 'Nutrição equilibrada' },
+    { week: 2, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Pré-poo protetor Farmax' },
+    { week: 2, step: 2, type: 'Hidratação', desc: 'Wella Elements Renewing + Acidificante K.Pro pH Balancer' },
+    { week: 2, step: 3, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost (brilho espelhado e emoliência)' },
     
-    { week: 3, step: 1, type: 'Hidratação', desc: 'Hidratação suave' },
-    { week: 3, step: 2, type: 'Nutrição', desc: 'Nutrição' },
-    { week: 3, step: 3, type: 'Hidratação', desc: 'Hidratação' },
+    { week: 3, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Secagem com Toalha de Microfibra' },
+    { week: 3, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost ou Umectação com Óleo de Uva' },
+    { week: 3, step: 3, type: 'Hidratação', desc: 'Wella Elements Renewing + Touca de cetim à noite' },
     
-    { week: 4, step: 1, type: 'Hidratação', desc: 'Hidratação' },
-    { week: 4, step: 2, type: 'Nutrição', desc: 'Nutrição leve' },
-    { week: 4, step: 3, type: 'Reconstrução', desc: 'Reconstrução mensal preventiva' },
+    { week: 4, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Finalização leve com Oil Light' },
+    { week: 4, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost' },
+    { week: 4, step: 3, type: 'Reconstrução', desc: 'L\'Oréal Absolut Repair Gold Quinoa + Acidificante K.Pro (reconstrução mensal)' },
   ],
   baixa: [
-    { week: 1, step: 1, type: 'Hidratação', desc: 'Hidratação com enxágue em água morna' },
-    { week: 1, step: 2, type: 'Hidratação', desc: 'Hidratação com máscara bem líquida/gel' },
-    { week: 1, step: 3, type: 'Nutrição', desc: 'Nutrição com óleo de jojoba/semente de uva' },
+    { week: 1, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing (enxágue morno para abrir cutículas)' },
+    { week: 1, step: 2, type: 'Hidratação', desc: 'Wella Elements Renewing (fórmula sem silicone não cria barreira)' },
+    { week: 1, step: 3, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost (aplicar apenas 1 moeda pequena nas pontas)' },
     
-    { week: 2, step: 1, type: 'Hidratação', desc: 'Hidratação leve' },
-    { week: 2, step: 2, type: 'Hidratação', desc: 'Hidratação' },
-    { week: 2, step: 3, type: 'Hidratação', desc: 'Hidratação' },
+    { week: 2, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Pré-poo com Óleo de Semente de Uva Farmax' },
+    { week: 2, step: 2, type: 'Hidratação', desc: 'Wella Elements Renewing + Acidificante K.Pro pH Balancer (3 min)' },
+    { week: 2, step: 3, type: 'Hidratação', desc: 'Wella Elements Renewing + Leave-in Lowell Bioplastia' },
     
-    { week: 3, step: 1, type: 'Hidratação', desc: 'Hidratação' },
-    { week: 3, step: 2, type: 'Nutrição', desc: 'Nutrição bem dosada' },
-    { week: 3, step: 3, type: 'Hidratação', desc: 'Hidratação' },
+    { week: 3, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing + Toalha de Microfibra suave' },
+    { week: 3, step: 2, type: 'Nutrição', desc: 'Wella Oil Reflections Reboost (dose controlada) + Touca de Cetim' },
+    { week: 3, step: 3, type: 'Hidratação', desc: 'Wella Elements Renewing para manter a elasticidade' },
     
-    { week: 4, step: 1, type: 'Hidratação', desc: 'Hidratação' },
-    { week: 4, step: 2, type: 'Hidratação', desc: 'Hidratação' },
-    { week: 4, step: 3, type: 'Reconstrução', desc: 'Reconstrução ultra leve (aminoácidos)' },
+    { week: 4, step: 1, type: 'Hidratação', desc: 'Wella Elements Renewing' },
+    { week: 4, step: 2, type: 'Hidratação', desc: 'Wella Elements Renewing + 1 gota de Oil Reflections Light' },
+    { week: 4, step: 3, type: 'Reconstrução', desc: 'L\'Oréal Absolut Repair Gold Quinoa (toque leve, não endurece a fibra)' },
   ]
 };
 
-// Produtos sugeridos inicialmente
+// Kit de produtos adquiridos pelo usuário (Kit Salão Shopee)
 const DEFAULT_PRODUCTS = [
-  { id: 'p1', name: 'Dercos Anticaspa DS', brand: 'Vichy', category: 'dermatite', notes: 'Aplicar no couro cabeludo, pausar 3 a 5 min. Usar 2-3x/semana.' },
-  { id: 'p2', name: 'Shampoo Cetoconazol 2%', brand: 'Genérico / Medley', category: 'dermatite', notes: 'Tratamento antifúngico para crises de dermatite.' },
-  { id: 'p3', name: 'Yamasterol Babosa & D-Pantenol', brand: 'Yamá', category: 'pre-poo', notes: 'Perfeito para Pré-Poo! Passar nas pontas antes de lavar para proteger do shampoo anticaspa.' },
-  { id: 'p4', name: 'Be(M)dita Ghee Banana & Aloe Vera', brand: 'Lola Cosmetics', category: 'hidratação', notes: 'Fórmula leve em gel/emulsão, não pesa no 2C/3A fino.' },
-  { id: 'p5', name: 'Máscara Líquida Booster Danos Vorazes', brand: 'Lola Cosmetics', category: 'nutrição', notes: 'Líquida que vira creme: brilho espelhado sem deixar o fio murcho.' },
-  { id: 'p6', name: 'Acidificante Densidade pH 3.0', brand: 'Lola Cosmetics', category: 'acidificante', notes: 'Sela as cutículas, acaba com a aspereza e facilita o desembaraço instantaneamente.' },
-  { id: 'p7', name: 'Máscara Tarja Preta Queratina Vegetal', brand: 'Lola Cosmetics', category: 'reconstrução', notes: 'Reposição de aminoácidos para recuperar a força do fio.' },
-  { id: 'p8', name: 'Óleo Oil Reflections Light', brand: 'Wella Professionals', category: 'finalizador', notes: 'Óleo levíssimo específico para cabelos finos. Dá brilho sem oleosidade.' }
+  { id: 'p_dercos', name: 'Dercos Anticaspa DS / Cetoconazol 2%', brand: 'Vichy / Medley', category: 'dermatite', notes: 'Aplicar exclusivamente no couro cabeludo, massagear e pausar 3 a 5 min no timer. Usar 2 a 3x na semana.' },
+  { id: 'p_farmax_uva', name: 'Óleo Puro de Semente de Uva (Kit 2x 100ml)', brand: 'Farmax 100% Vegetal', category: 'pre-poo', notes: 'Óleo vegetal levíssimo. Aplicar 4 a 6 gotas nas pontas 15-20 min antes do banho como Pré-Poo protetor ou para umectação noturna suave.' },
+  { id: 'p_wella_elements', name: 'Máscara Elements Renewing (150ml)', brand: 'Wella Professionals', category: 'hidratação', notes: 'Fórmula limpa sem silicones, sulfatos ou parabenos. Hidratação renovadora e fluida com pantenol, perfeita para o fio fino 2C/3A não pesar.' },
+  { id: 'p_wella_reboost', name: 'Máscara Oil Reflections Luminous Reboost (500ml)', brand: 'Wella Professionals', category: 'nutrição', notes: 'Nutrição profunda e luminosidade com óleo de camélia e chá branco. Restaura os lipídios, combate o frizz e devolve brilho espelhado.' },
+  { id: 'p_loreal_gold', name: 'Máscara Absolut Repair Gold Quinoa & Protein (500g)', brand: "L'Oréal Professionnel", category: 'reconstrução', notes: 'Reconstrução e reparação profunda com Quinoa Dourada e Proteína Hidrolisada. Recupera danos estruturais mantendo o toque leve e sedoso.' },
+  { id: 'p_kpro_acid', name: 'pH Balancer Acidificante Cuticular (pH 2.2 - 2.5)', brand: 'K.Pro Profissional', category: 'acidificante', notes: 'Padrão ouro para selar cutículas e reequilibrar o pH do fio. Usar após o shampoo ou após a máscara por 3 min para brilho vitrificado.' },
+  { id: 'p_lowell_bioplastia', name: 'Leave-in Reconstrutor Bioplastia (120ml)', brand: 'Lowell Profissional', category: 'finalizador', notes: 'Leave-in reconstrutor com proteção térmica e ação desembaraçante instantânea. Sela as cutículas, evita frizz e disciplina cachos/ondas sem pesar.' },
+  { id: 'p_wella_oil_light', name: 'Óleo Oil Reflections Light (100ml)', brand: 'Wella Professionals', category: 'finalizador', notes: 'Óleo levíssimo premium com toque seco desenvolvido especificamente para cabelos finos. Finaliza com brilho radiante sem deixar o cabelo murcho.' }
 ];
 
 // Estado da aplicação
@@ -147,11 +147,42 @@ function loadState() {
     if (raw) {
       const parsed = JSON.parse(raw);
       appState = { ...appState, ...parsed };
+
+      // Auto-sincronizar produtos adquiridos (Wella, L'Oréal, Lowell, K.Pro, Farmax) no armário
+      if (Array.isArray(appState.products)) {
+        DEFAULT_PRODUCTS.forEach(dp => {
+          const exists = appState.products.some(p => 
+            p.id === dp.id || 
+            (p.name && dp.name && p.name.toLowerCase().includes(dp.name.toLowerCase().slice(0, 15)))
+          );
+          if (!exists) {
+            appState.products.unshift(dp);
+          }
+        });
+      }
     }
   } catch (err) {
     console.error('Erro ao ler localStorage', err);
   }
 }
+
+// Sincronizar ou restaurar kit de salão adquirido no armário
+window.syncShopeePurchases = function() {
+  DEFAULT_PRODUCTS.forEach(dp => {
+    const idx = appState.products.findIndex(p => 
+      p.id === dp.id || 
+      (p.name && dp.name && p.name.toLowerCase().includes(dp.name.toLowerCase().slice(0, 15)))
+    );
+    if (idx >= 0) {
+      appState.products[idx] = dp;
+    } else {
+      appState.products.unshift(dp);
+    }
+  });
+  saveState();
+  renderProducts();
+  showToast('Kit de salão Shopee sincronizado no seu Armário!');
+};
 
 function saveState() {
   try {
@@ -416,6 +447,17 @@ window.openLogCareModalWithStep = function(type, stepIndex) {
   lucide.createIcons();
 };
 
+window.appendProductToInput = function(prodName) {
+  const input = document.getElementById('inputProductsUsed');
+  if (!input) return;
+  if (!input.value.trim()) {
+    input.value = prodName;
+  } else if (!input.value.includes(prodName)) {
+    input.value += ' + ' + prodName;
+  }
+  input.focus();
+};
+
 // Formulários
 function initForms() {
   // Form de Log de Lavagem
@@ -429,6 +471,7 @@ function initForms() {
     const isDermatitis = document.getElementById('checkDermatitisShampoo').checked;
     const isPrePoo = document.getElementById('checkPrePoo').checked;
     const isAcidifier = document.getElementById('checkAcidifier').checked;
+    const isAccessories = document.getElementById('checkAccessories') ? document.getElementById('checkAccessories').checked : false;
     const products = document.getElementById('inputProductsUsed').value.trim();
     const feeling = document.querySelector('input[name="hairFeeling"]:checked').value;
     const notes = document.getElementById('inputCareNotes').value.trim();
@@ -442,6 +485,7 @@ function initForms() {
       isDermatitis,
       isPrePoo,
       isAcidifier,
+      isAccessories,
       products: products || 'Produtos habituais',
       feeling,
       notes,
@@ -541,6 +585,7 @@ function renderHistory() {
           ${item.isDermatitis ? '<span class="text-[10px] font-semibold bg-teal-50 text-teal-700 border border-teal-200 px-2 py-0.5 rounded-md">Couro: Anticaspa</span>' : ''}
           ${item.isPrePoo ? '<span class="text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-md">Pré-Poo</span>' : ''}
           ${item.isAcidifier ? '<span class="text-[10px] font-semibold bg-rose-50 text-rose-700 border border-rose-200 px-2 py-0.5 rounded-md">Acidificante</span>' : ''}
+          ${item.isAccessories ? '<span class="text-[10px] font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded-md">Microfibra/Cetim</span>' : ''}
           <button onclick="deleteHistoryItem('${item.id}')" class="text-slate-300 hover:text-rose-500 p-1 text-xs ml-2" title="Excluir">
             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
           </button>
@@ -995,13 +1040,13 @@ const RECOMMENDED_MARKET_PRODUCTS = [
   },
   // Profissional
   {
-    id: 'rec_wella_reboost',
-    name: 'Oil Reflections Luminous Reboost Máscara',
+    id: 'rec_wella_elements',
+    name: 'Máscara Elements Renewing (Fórmula Limpa)',
     brand: 'Wella Professionals',
     category: 'hidratação',
     budget: 'premium',
-    price: '~ R$ 120 - 145',
-    why: 'Tecnologia profissional de reflexo de luz e pantenol puro. Maciez e toque de salão.'
+    price: '~ R$ 130 - 150',
+    why: 'Fórmula botânica renovadora sem silicones nem sulfatos. Pantenol botânico que hidrata profundamente sem pesar no fio fino 2C/3A.'
   },
   {
     id: 'rec_senscience_inner',
@@ -1054,13 +1099,13 @@ const RECOMMENDED_MARKET_PRODUCTS = [
   },
   // Profissional
   {
-    id: 'rec_loreal_absolut',
-    name: 'Absolut Repair Gold Quinoa & Proteína',
-    brand: "L'Oréal Professionnel",
+    id: 'rec_wella_reboost',
+    name: 'Oil Reflections Luminous Reboost Máscara',
+    brand: 'Wella Professionals',
     category: 'nutrição',
     budget: 'premium',
-    price: '~ R$ 130 - 155',
-    why: 'Versão Gold Quinoa deixa toque leve, reduz o frizz e devolve luminosidade instantânea.'
+    price: '~ R$ 130 - 160 (500ml)',
+    why: 'Nutrição luminosa com óleo de camélia e chá branco. Recupera a barreira lipídica e sela o frizz com brilho espelhado.'
   },
 
   // ================= 6. RECONSTRUÇÃO (R) =================
@@ -1103,6 +1148,15 @@ const RECOMMENDED_MARKET_PRODUCTS = [
     why: 'Ação rápida na fibra capilar, recuperando a textura macia das pontas secas.'
   },
   // Profissional
+  {
+    id: 'rec_loreal_absolut',
+    name: 'Absolut Repair Gold Quinoa & Proteína',
+    brand: "L'Oréal Professionnel",
+    category: 'reconstrução',
+    budget: 'premium',
+    price: '~ R$ 130 - 155 (500g)',
+    why: 'Reconstrução de salão com Quinoa Dourada e proteína hidrolisada. Repara danos profundos mantendo o cacho maleável e toque leve.'
+  },
   {
     id: 'rec_lowell_bioplastia',
     name: 'Bioplastia Creme Reconstrutor de Fios',
