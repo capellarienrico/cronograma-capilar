@@ -141,9 +141,15 @@
             <p id="nextStepDesc" class="text-slate-300 text-sm max-w-xl">
               Foco em devolver água e maleabilidade para acabar com a sensação áspera do fio fino sem pesar.
             </p>
-            <div id="dermatitisAlertInCard" class="flex items-center gap-2 text-xs text-teal-300 bg-teal-950/60 border border-teal-800/80 px-3 py-1.5 rounded-lg w-fit mt-2">
-              <i data-lucide="info" class="w-3.5 h-3.5 flex-shrink-0"></i>
-              <span>Lembrete: Se for dia de shampoo anticaspa, aplique pré-poo nas pontas primeiro!</span>
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+              <div id="dermatitisAlertInCard" class="flex items-center gap-2 text-xs text-teal-300 bg-teal-950/60 border border-teal-800/80 px-3 py-1.5 rounded-lg w-fit">
+                <i data-lucide="info" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                <span>Lembrete: Se for dia de shampoo anticaspa, aplique pré-poo nas pontas primeiro!</span>
+              </div>
+              <button type="button" id="btnOpenShowerGuide" class="inline-flex items-center gap-1.5 text-xs text-teal-200 hover:text-white bg-teal-900/60 hover:bg-teal-800/80 border border-teal-700/80 px-3 py-1.5 rounded-lg transition font-medium cursor-pointer">
+                <i data-lucide="bath" class="w-3.5 h-3.5 text-teal-400"></i>
+                <span>Ordem de Aplicação no Banho</span>
+              </button>
             </div>
           </div>
 
@@ -286,6 +292,130 @@
             <p class="text-sm text-teal-100 max-w-2xl leading-relaxed">
               A dermatite seborreica é uma inflamação no couro cabeludo ligada ao excesso de oleosidade e ao fungo <em>Malassezia</em>. Lavar com frequência é ótimo para controlar a caspa, mas os shampoos medicamentosos podem estragar o comprimento ondulado se você não aplicar a técnica correta!
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ordem Exata de Aplicação no Banho & Perguntas Críticas -->
+      <div id="showerRoutineSection" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="bath" class="w-5 h-5 text-teal-600"></i>
+              Ritual do Banho: Ordem de Aplicação dos Produtos
+            </h3>
+            <p class="text-xs text-slate-500">
+              Passo a passo cronometrado para não ressecar as pontas e não alimentar o fungo da dermatite na raiz.
+            </p>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200 w-fit">
+            Fio 2C/3A • Sem Pesar
+          </span>
+        </div>
+
+        <!-- Timeline dos Passos 0 a 5 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          
+          <!-- Passo 0 -->
+          <div class="p-3.5 rounded-xl border border-teal-200 bg-teal-50/50 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-teal-600 text-white text-[11px] flex items-center justify-center font-bold">0</span>
+                Pré-Poo Protetor
+              </span>
+              <span class="text-[10px] text-teal-700 bg-teal-100 px-1.5 py-0.2 rounded font-medium">15 min antes</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              No cabelo seco, pingue <strong>4 a 6 gotas do Óleo de Uva Farmax</strong> nas pontas. Cria um escudo contra o sulfato adstringente do shampoo.
+            </p>
+          </div>
+
+          <!-- Passo 1 -->
+          <div class="p-3.5 rounded-xl border border-sky-200 bg-sky-50/50 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-sky-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-sky-600 text-white text-[11px] flex items-center justify-center font-bold">1</span>
+                Shampoo Anticaspa
+              </span>
+              <span class="text-[10px] text-sky-700 bg-sky-100 px-1.5 py-0.2 rounded font-medium">Timer 3 min</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Aplique o <strong>Dercos / Cetoconazol</strong> exclusivamente no couro cabeludo com a polpa dos dedos. Deixe agir por 3 min no timer.
+            </p>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-slate-700 text-white text-[11px] flex items-center justify-center font-bold">2</span>
+                Tirar Excesso de Água
+              </span>
+              <span class="text-[10px] text-slate-600 bg-slate-200 px-1.5 py-0.2 rounded font-medium">Crucial</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Aperte o cabelo com a <strong>Toalha de Microfibra</strong> para tirar o excesso de água. Cabelo encharcado dilui e desperdiça a máscara.
+            </p>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="p-3.5 rounded-xl border border-brand-200 bg-brand-50/40 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-brand-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-brand-600 text-white text-[11px] flex items-center justify-center font-bold">3</span>
+                Máscara com Espátula
+              </span>
+              <span class="text-[10px] text-brand-700 bg-brand-100 px-1.5 py-0.2 rounded font-medium">3 a 5 min</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Use a <strong>espátula plástica</strong> (1 colher rasa). Aplique do meio às pontas (a 3 dedos da raiz). Enluve mecha por mecha e enxágue 100%.
+            </p>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="p-3.5 rounded-xl border border-rose-200 bg-rose-50/40 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-rose-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-rose-600 text-white text-[11px] flex items-center justify-center font-bold">4</span>
+                Acidificante K.Pro
+              </span>
+              <span class="text-[10px] text-rose-700 bg-rose-100 px-1.5 py-0.2 rounded font-medium">1x na semana</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Após a máscara, aplique o <strong>K.Pro pH Balancer</strong> por 3 min. Ele rebaixa o pH para 2.2 e sela as cutículas, dispensando condicionador!
+            </p>
+          </div>
+
+          <!-- Passo 5 -->
+          <div class="p-3.5 rounded-xl border border-purple-200 bg-purple-50/40 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-900 flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-full bg-purple-600 text-white text-[11px] flex items-center justify-center font-bold">5</span>
+                Leave-in & Finalização
+              </span>
+              <span class="text-[10px] text-purple-700 bg-purple-100 px-1.5 py-0.2 rounded font-medium">Sem Enxágue</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Toalha de microfibra por 5 min + meia moeda de <strong>Lowell Bioplastia</strong> amassando os cachos + 1 gota de <strong>Wella Oil Light</strong>.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Bloco de Respostas Críticas -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+            <i data-lucide="help-circle" class="w-4 h-4 text-teal-600"></i> Perguntas Frequentes do Ritual:
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600">
+            <div class="bg-white p-3 rounded-lg border border-slate-200/80 space-y-1">
+              <strong class="text-slate-900 block font-semibold">❓ Devo usar condicionador tradicional?</strong>
+              <p><strong>Não é necessário!</strong> Suas máscaras profissionais (Wella e L'Oréal) já possuem alta carga condicionante, e o Acidificante K.Pro (pH 2.2) sela a cutícula com perfeição. Usar condicionador a mais no fio fino 2C/3A vai murchar suas ondas e causar peso/acúmulo.</p>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200/80 space-y-1">
+              <strong class="text-slate-900 block font-semibold">❓ Existem dias que NÃO devo lavar?</strong>
+              <p><strong>Sim! O ideal é lavar dia sim, dia não (3 a 4x/semana).</strong> Nos dias de intervalo (Day After), use a <strong>touca de cetim</strong> para dormir, não molhe o cabelo no chuveiro e use apenas 1 gota de óleo leve se precisar reativar as pontas.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1091,6 +1221,99 @@
           <span>Fazer e Registrar Agora</span>
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: GUIA DO BANHO (ORDEM DOS PRODUTOS) ================= -->
+  <div id="modalShowerGuide" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 space-y-5 my-8 max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <div class="flex items-start justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center border border-teal-100 shadow-xs">
+            <i data-lucide="bath" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-slate-900 leading-tight">Ritual do Banho: Ordem Exata</h3>
+            <p class="text-xs text-slate-500">Como aplicar cada produto no cabelo 2C/3A fino & dermatite</p>
+          </div>
+        </div>
+        <button class="btnCloseShowerModal text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Sequência Passo a Passo -->
+      <div class="space-y-3">
+        
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-teal-200 bg-teal-50/60">
+          <span class="w-6 h-6 rounded-full bg-teal-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">0</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="text-teal-950 font-bold block">15 a 20 min antes: Pré-Poo com Óleo de Semente de Uva</strong>
+            <p class="text-slate-600">Aplique 4 a 6 gotas do <em>Óleo Farmax Puro</em> do meio às pontas com o cabelo seco. Ele blinda as pontas contra o ressecamento do shampoo anticaspa.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-sky-200 bg-sky-50/60">
+          <span class="w-6 h-6 rounded-full bg-sky-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="text-sky-950 font-bold block">No Chuveiro: Shampoo Anticaspa Dercos / Cetoconazol (Raiz Apenas)</strong>
+            <p class="text-slate-600">Massageie a raiz com a polpa dos dedos e pause no <strong>Timer de 3 minutos</strong>. Não esfregue o shampoo nas pontas; apenas deixe a espuma escorrer no enxágue.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-slate-200 bg-slate-50">
+          <span class="w-6 h-6 rounded-full bg-slate-700 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="text-slate-900 font-bold block">Crucial: Tirar o Excesso de Água</strong>
+            <p class="text-slate-600">Aperte suavemente com a <em>Toalha de Microfibra</em>. Passar máscara no cabelo encharcado faz o produto escorrer pelo ralo sem penetrar.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-brand-200 bg-brand-50/50">
+          <span class="w-6 h-6 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="text-brand-950 font-bold block">Tratamento: Máscara Profissional com Espátula</strong>
+            <p class="text-slate-600">Pegue 1 colher rasa com a espátula (nunca a mão molhada no pote!). Aplique a 3 dedos da raiz, enluve as mechas e deixe agir de 3 a 5 min. Enxágue 100%.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-rose-200 bg-rose-50/50">
+          <span class="w-6 h-6 rounded-full bg-rose-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="text-rose-950 font-bold block">Selagem: Acidificante K.Pro pH Balancer (1x por semana)</strong>
+            <p class="text-slate-600">Pós-máscara, aplique por 3 min. Com pH 2.2, ele fecha as cutículas e dá brilho vitrificado. <strong>Dispensa completamente o condicionador!</strong></p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3 rounded-xl border border-purple-200 bg-purple-50/50">
+          <span class="w-6 h-6 rounded-full bg-purple-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">5</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="text-purple-950 font-bold block">Pós-Banho: Leave-in Lowell Bioplastia + 1 Gota Oil Light</strong>
+            <p class="text-slate-600">Enrole na microfibra por 5 min. Aplique meia moeda de Leave-in amassando os cachos de baixo para cima e finalize com 1 gota de óleo leve. Nunca durma com o cabelo úmido!</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ Rápido -->
+      <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
+        <div>
+          <strong class="text-slate-900 block font-semibold">❓ Preciso de condicionador?</strong>
+          <span>Não! Suas máscaras profissionais e o K.Pro já selam o fio. Condicionador extra no fio fino gera acúmulo e pesa.</span>
+        </div>
+        <div>
+          <strong class="text-slate-900 block font-semibold">❓ Existem dias que não devo lavar?</strong>
+          <span>Sim! Lave dia sim, dia não (3 a 4x/semana). Nos dias sem lavagem, proteja com a touca de cetim e não molhe o couro cabeludo.</span>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100">
+        <button type="button" class="btnCloseShowerModal w-full bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl text-xs font-semibold transition">
+          Entendido
+        </button>
+      </div>
+
     </div>
   </div>
 

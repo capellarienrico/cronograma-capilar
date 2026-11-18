@@ -393,6 +393,7 @@ function initModals() {
   const modalLog = document.getElementById('modalLogCare');
   const modalProd = document.getElementById('modalAddProduct');
   const modalDyn = document.getElementById('modalDynamicCycle');
+  const modalShower = document.getElementById('modalShowerGuide');
 
   // Fechar modais ao clicar no X ou fora
   document.querySelectorAll('.btnCloseModal').forEach(b => {
@@ -409,6 +410,12 @@ function initModals() {
     });
   });
 
+  document.querySelectorAll('.btnCloseShowerModal').forEach(b => {
+    b.addEventListener('click', () => {
+      if (modalShower) modalShower.classList.add('hidden');
+    });
+  });
+
   modalLog.addEventListener('click', (e) => {
     if (e.target === modalLog) modalLog.classList.add('hidden');
   });
@@ -420,6 +427,22 @@ function initModals() {
   if (modalDyn) {
     modalDyn.addEventListener('click', (e) => {
       if (e.target === modalDyn) modalDyn.classList.add('hidden');
+    });
+  }
+
+  if (modalShower) {
+    modalShower.addEventListener('click', (e) => {
+      if (e.target === modalShower) modalShower.classList.add('hidden');
+    });
+  }
+
+  const btnOpenShower = document.getElementById('btnOpenShowerGuide');
+  if (btnOpenShower) {
+    btnOpenShower.addEventListener('click', () => {
+      if (modalShower) {
+        modalShower.classList.remove('hidden');
+        lucide.createIcons();
+      }
     });
   }
 
