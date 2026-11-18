@@ -72,7 +72,7 @@
         <a href="releases.html" class="text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5" title="Ver Releases & Novidades">
           <i data-lucide="tag" class="w-3.5 h-3.5 text-slate-500"></i>
           <span class="hidden md:inline">Releases</span>
-          <span class="px-1 py-0.2 rounded text-[10px] font-bold bg-brand-100 text-brand-700">v1.4</span>
+          <span class="px-1 py-0.2 rounded text-[10px] font-bold bg-brand-100 text-brand-700">v1.5</span>
         </a>
         <button id="btnInstallPwa" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-sm">
           <i data-lucide="download" class="w-4 h-4"></i>
@@ -152,6 +152,10 @@
               <i data-lucide="check" class="w-5 h-5"></i>
               Marcar como Feito Hoje
             </button>
+            <button id="btnOpenDynamicCycle" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-3 rounded-xl font-semibold shadow-lg shadow-teal-600/40 flex items-center justify-center gap-2 transition hover:scale-[1.02] active:scale-[0.98]" title="Decidir próximo passo dinâmico baseado no que você fez">
+              <i data-lucide="git-branch" class="w-4 h-4"></i>
+              <span>Qual o Próximo Passo?</span>
+            </button>
             <button id="btnCustomWash" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 transition">
               <i data-lucide="sliders" class="w-4 h-4"></i>
               Outro Cuidado
@@ -177,6 +181,30 @@
             <span class="block text-xs text-slate-400">Ciclo Atual</span>
             <span id="statCycleProgress" class="text-sm font-semibold text-brand-300">0% concluído</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Notificação de Ciclo Dinâmico Ativo -->
+      <div id="dynamicStepNotice" class="hidden bg-gradient-to-r from-teal-50 via-emerald-50 to-sky-50 border border-teal-200/80 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-teal-950 shadow-xs">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-teal-600/30">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-bold uppercase tracking-wider bg-teal-200/80 text-teal-900 px-2 py-0.5 rounded-md">Ciclo Dinâmico Ativo</span>
+              <span id="dynamicStepTitleBadge" class="text-xs font-bold text-teal-800"></span>
+            </div>
+            <p id="dynamicStepNoticeDesc" class="text-xs text-teal-700 mt-0.5 max-w-xl"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btnReopenDynamicCycle" class="text-xs font-semibold text-teal-800 hover:text-teal-950 bg-white hover:bg-teal-100/70 border border-teal-300/80 px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-2xs">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Recalcular
+          </button>
+          <button id="btnClearDynamicStep" class="text-xs font-medium text-slate-500 hover:text-rose-600 px-2.5 py-1.5 rounded-lg transition" title="Voltar ao cronograma linear de 4 semanas">
+            Voltar ao Padrão
+          </button>
         </div>
       </div>
 
@@ -898,6 +926,171 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: DECISOR DE PRÓXIMO PASSO (CICLOS DINÂMICOS) ================= -->
+  <div id="modalDynamicCycle" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 space-y-5 my-8 max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Header -->
+      <div class="flex items-start justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center border border-teal-100 shadow-xs">
+            <i data-lucide="git-branch" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-slate-900 leading-tight">Decisor de Próximo Passo</h3>
+            <p class="text-xs text-slate-500">Ciclos dinâmicos e adaptativos para Cabelo 2C/3A Fio Fino & Scalp Care</p>
+          </div>
+        </div>
+        <button class="btnCloseDynamicModal text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Conteúdo Interativo -->
+      <div class="space-y-5">
+        <!-- Pergunta 1: O que foi feito por último? -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+              1. Qual foi a última coisa que você fez?
+            </label>
+            <span id="lastActionHint" class="text-[11px] text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md font-medium border border-teal-100"></span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="dynamicLastActionOptions">
+            <button type="button" class="dyn-btn-last p-2.5 rounded-xl border border-slate-200 hover:border-sky-300 text-left transition flex flex-col gap-1 text-slate-700 bg-white" data-value="Hidratação">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-sky-700">
+                <i data-lucide="droplets" class="w-4 h-4 text-sky-500"></i> Hidratação
+              </span>
+              <span class="text-[11px] text-slate-500 leading-tight">Wella Elements • Reposição de água</span>
+            </button>
+            
+            <button type="button" class="dyn-btn-last p-2.5 rounded-xl border border-slate-200 hover:border-amber-300 text-left transition flex flex-col gap-1 text-slate-700 bg-white" data-value="Nutrição">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> Nutrição / Umectação
+              </span>
+              <span class="text-[11px] text-slate-500 leading-tight">Wella Reboost • Óleo Farmax</span>
+            </button>
+
+            <button type="button" class="dyn-btn-last p-2.5 rounded-xl border border-slate-200 hover:border-purple-300 text-left transition flex flex-col gap-1 text-slate-700 bg-white" data-value="Reconstrução">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-purple-700">
+                <i data-lucide="shield" class="w-4 h-4 text-purple-500"></i> Reconstrução
+              </span>
+              <span class="text-[11px] text-slate-500 leading-tight">L'Oréal Gold Quinoa • Proteína</span>
+            </button>
+
+            <button type="button" class="dyn-btn-last p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 text-left transition flex flex-col gap-1 text-slate-700 bg-white" data-value="Acidificação">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700">
+                <i data-lucide="scale" class="w-4 h-4 text-rose-500"></i> Acidificação Cuticular
+              </span>
+              <span class="text-[11px] text-slate-500 leading-tight">K.Pro pH Balancer • Selagem</span>
+            </button>
+
+            <button type="button" class="dyn-btn-last p-2.5 rounded-xl border border-slate-200 hover:border-teal-300 text-left transition flex flex-col gap-1 text-slate-700 bg-white col-span-2 sm:col-span-2" data-value="Anticaspa">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700">
+                <i data-lucide="shield-alert" class="w-4 h-4 text-teal-600"></i> Só Shampoo Anticaspa / Lavagem Rápida
+              </span>
+              <span class="text-[11px] text-slate-500 leading-tight">Dercos / Cetoconazol sem máscara profunda de tratamento</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pergunta 2: Como está a sensação do cabelo hoje? -->
+        <div class="space-y-2">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+            2. Como seu cabelo ou couro cabeludo está se comportando hoje?
+          </label>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="dynamicHairFeelingOptions">
+            <button type="button" class="dyn-btn-feeling p-2.5 rounded-xl border border-slate-200 hover:border-emerald-300 text-left transition flex items-center gap-2 text-xs font-medium text-slate-700 bg-white" data-value="normal">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <span>Normal / Equilibrado</span>
+            </button>
+
+            <button type="button" class="dyn-btn-feeling p-2.5 rounded-xl border border-slate-200 hover:border-sky-300 text-left transition flex items-center gap-2 text-xs font-medium text-slate-700 bg-white" data-value="ressecado">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-500 shrink-0"></span>
+              <span>Áspero / Ressecado / Frizz</span>
+            </button>
+
+            <button type="button" class="dyn-btn-feeling p-2.5 rounded-xl border border-slate-200 hover:border-amber-300 text-left transition flex items-center gap-2 text-xs font-medium text-slate-700 bg-white" data-value="pesado">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span>
+              <span>Pesado / Oleoso / Acúmulo</span>
+            </button>
+
+            <button type="button" class="dyn-btn-feeling p-2.5 rounded-xl border border-slate-200 hover:border-purple-300 text-left transition flex items-center gap-2 text-xs font-medium text-slate-700 bg-white" data-value="rigido">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shrink-0"></span>
+              <span>Rígido / Espigado</span>
+            </button>
+
+            <button type="button" class="dyn-btn-feeling p-2.5 rounded-xl border border-slate-200 hover:border-rose-300 text-left transition flex items-center gap-2 text-xs font-medium text-slate-700 bg-white" data-value="poroso">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0"></span>
+              <span>Poroso / Sem Definição</span>
+            </button>
+
+            <button type="button" class="dyn-btn-feeling p-2.5 rounded-xl border border-slate-200 hover:border-teal-300 text-left transition flex items-center gap-2 text-xs font-medium text-slate-700 bg-white" data-value="dermatite">
+              <span class="w-2.5 h-2.5 rounded-full bg-teal-500 shrink-0"></span>
+              <span>Couro Atacado / Caspa</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card de Resultado da Decisão -->
+        <div id="dynamicDecisionResult" class="rounded-2xl border-2 border-teal-500/40 bg-gradient-to-br from-teal-50/70 via-white to-sky-50/50 p-4 sm:p-5 space-y-4 shadow-sm">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="dynResultBadgeType" class="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-100 text-sky-800 border border-sky-300">
+                  Hidratação
+                </span>
+                <span id="dynResultCycleName" class="text-xs font-semibold text-teal-800">
+                  Ciclo Hidra-Pureza
+                </span>
+              </div>
+              <h4 id="dynResultTitle" class="text-base sm:text-lg font-bold text-slate-900 mt-1.5 leading-snug">
+                Próximo Cuidado Recomendado: Hidratação Fluida
+              </h4>
+            </div>
+          </div>
+
+          <div class="p-3 bg-white/90 backdrop-blur-xs rounded-xl border border-slate-200/80 text-xs text-slate-700 space-y-1">
+            <div class="flex items-center gap-1.5 font-bold text-slate-800">
+              <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i>
+              <span>Por que esta etapa?</span>
+            </div>
+            <p id="dynResultReason" class="leading-relaxed">
+              Após a reconstrução rica em queratina, a fibra capilar precisa de água pura para restaurar a maleabilidade e evitar que o fio fino fique rígido ou quebradiço.
+            </p>
+          </div>
+
+          <div class="space-y-1.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <i data-lucide="package" class="w-3.5 h-3.5 text-teal-600"></i> Produtos recomendados do seu Armário:
+            </span>
+            <div id="dynResultProducts" class="flex flex-wrap gap-1.5 text-xs">
+              <!-- Badges de produtos -->
+            </div>
+          </div>
+
+          <!-- Protocolo Scalp / Pré-Poo contextual -->
+          <div id="dynResultScalpTip" class="text-xs bg-teal-100/70 text-teal-950 border border-teal-200 p-3 rounded-xl flex items-start gap-2.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-teal-700 shrink-0 mt-0.5"></i>
+            <span id="dynResultScalpTipText" class="leading-relaxed"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ações Finais -->
+      <div class="flex flex-col sm:flex-row gap-2.5 pt-3 border-t border-slate-100">
+        <button type="button" id="btnApplyDynamicToDashboard" class="flex-1 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          <span>Definir como Próximo Cuidado no Dashboard</span>
+        </button>
+        <button type="button" id="btnLogDynamicImmediately" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm">
+          <i data-lucide="play" class="w-4 h-4"></i>
+          <span>Fazer e Registrar Agora</span>
+        </button>
+      </div>
     </div>
   </div>
 

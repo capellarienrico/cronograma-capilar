@@ -12,11 +12,15 @@ O **CapilarFlow** foi desenvolvido sob medida para rotinas capilares com necessi
 ---
 
 ## 🚀 Funcionalidades
-1. **Cronograma Dinâmico de 4 Semanas:**
-   - Visualização clara das 12 etapas principais do ciclo.
+1. **Decisor de Próximo Passo & Ciclos Dinâmicos (Novo! 🔄🌿):**
+   - Rompe com a esteira rígida de 12 etapas em linha reta.
+   - Janela interativa onde você aponta o que fez na última lavagem (Hidratação, Nutrição, Reconstrução, Acidificação ou Anticaspa) e o estado atual do fio.
+   - Diagnóstico científico imediato com cálculo da próxima etapa ideal, evitando sobrecarga de proteína (*overload*), *build-up* de óleos no fio fino 2C/3A e ressecamento pós-shampoo anticaspa.
+   - Aplicação com 1 clique no Dashboard ou abertura do registro com produtos do armário pré-preenchidos.
+2. **Cronograma Base de 4 Semanas por Porosidade:**
+   - Visualização das etapas calibradas por porosidade (alta, média e baixa).
    - Pré-calibrado com produtos profissionais de salão: **Wella Elements Renewing** (Hidratação), **Wella Oil Reflections Reboost** (Nutrição), **L'Oréal Absolut Repair Gold Quinoa** (Reconstrução), **K.Pro pH Balancer** (Acidificação), **Farmax Uva** (Pré-Poo) e **Lowell Bioplastia** (Finalizador).
-   - Cálculo automático do próximo passo e status de conclusão.
-2. **Protocolo para Dermatite Seborreica & Acessórios:**
+3. **Protocolo para Dermatite Seborreica & Acessórios:**
    - Alertas e regras de ouro (pré-poo protetor, nunca dormir com cabelo molhado).
    - Guia de acessórios: **Espátula Profissional** (proteção microbiológica dos potes de 500g), **Toalha de Microfibra com Botão** (secagem sem atrito/sem frizz) e **Touca de Cetim Dupla Face** (preservação do alinhamento noturno e Day After).
    - **Timer integrado de 3 minutos** com alarme para o tempo de ação do shampoo anticaspa no banho.

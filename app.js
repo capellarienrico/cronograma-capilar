@@ -77,6 +77,7 @@ let appState = {
   history: [],
   products: [...DEFAULT_PRODUCTS],
   lastDermatitisDate: null,
+  customNextStep: null, // Cuidado calculado dinamicamente pelo Decisor de Ciclos
 };
 
 // Timer de Shampoo Medicamentoso
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initTimer();
   initIngredientAnalyzer();
+  initDynamicCycle();
   initPwaSupport();
   renderPorositySelection();
   renderDashboard();
@@ -220,22 +222,45 @@ function renderDashboard() {
   const badgeScheduleDay = document.getElementById('badgeScheduleDay');
   const nextStepTitle = document.getElementById('nextStepTitle');
   const nextStepDesc = document.getElementById('nextStepDesc');
+  const dynamicNotice = document.getElementById('dynamicStepNotice');
 
-  badgeNextType.textContent = currentStep.type;
-  badgeScheduleDay.textContent = `Semana ${currentStep.week} • Etapa ${currentStep.step}`;
-  nextStepTitle.textContent = `Próximo Cuidado: ${currentStep.type}`;
-  nextStepDesc.textContent = currentStep.desc;
+  const isDynamic = !!appState.customNextStep;
+  const effectiveType = isDynamic ? appState.customNextStep.type : currentStep.type;
+  const effectiveDesc = isDynamic ? appState.customNextStep.desc : currentStep.desc;
+  const effectiveTitle = isDynamic ? `Próximo Cuidado: ${appState.customNextStep.title || appState.customNextStep.type}` : `Próximo Cuidado: ${currentStep.type}`;
+
+  badgeNextType.textContent = effectiveType;
+  nextStepTitle.textContent = effectiveTitle;
+  nextStepDesc.textContent = effectiveDesc;
+
+  if (isDynamic) {
+    badgeScheduleDay.textContent = `✨ ${appState.customNextStep.cycleName || 'Ciclo Dinâmico'}`;
+    if (dynamicNotice) {
+      dynamicNotice.classList.remove('hidden');
+      const badgeEl = document.getElementById('dynamicStepTitleBadge');
+      const descEl = document.getElementById('dynamicStepNoticeDesc');
+      if (badgeEl) badgeEl.textContent = appState.customNextStep.cycleName || 'Ciclo Inteligente';
+      if (descEl) descEl.textContent = appState.customNextStep.reason || appState.customNextStep.desc;
+    }
+  } else {
+    badgeScheduleDay.textContent = `Semana ${currentStep.week} • Etapa ${currentStep.step}`;
+    if (dynamicNotice) {
+      dynamicNotice.classList.add('hidden');
+    }
+  }
 
   // Cores do badge
   badgeNextType.className = 'px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border ';
-  if (currentStep.type === 'Hidratação') {
+  if (effectiveType === 'Hidratação') {
     badgeNextType.classList.add('bg-sky-500/20', 'text-sky-300', 'border-sky-500/40');
-  } else if (currentStep.type === 'Nutrição') {
+  } else if (effectiveType === 'Nutrição') {
     badgeNextType.classList.add('bg-amber-500/20', 'text-amber-300', 'border-amber-500/40');
-  } else if (currentStep.type === 'Reconstrução') {
+  } else if (effectiveType === 'Reconstrução') {
     badgeNextType.classList.add('bg-purple-500/20', 'text-purple-300', 'border-purple-500/40');
+  } else if (effectiveType === 'Acidificação') {
+    badgeNextType.classList.add('bg-rose-500/20', 'text-rose-300', 'border-rose-500/40');
   } else {
-    badgeNextType.classList.add('bg-slate-700', 'text-slate-200', 'border-slate-600');
+    badgeNextType.classList.add('bg-teal-500/20', 'text-teal-300', 'border-teal-500/40');
   }
 
   // Estatísticas do topo
@@ -367,6 +392,7 @@ function renderWeeksGrid(schedule) {
 function initModals() {
   const modalLog = document.getElementById('modalLogCare');
   const modalProd = document.getElementById('modalAddProduct');
+  const modalDyn = document.getElementById('modalDynamicCycle');
 
   // Fechar modais ao clicar no X ou fora
   document.querySelectorAll('.btnCloseModal').forEach(b => {
@@ -377,6 +403,12 @@ function initModals() {
     b.addEventListener('click', () => modalProd.classList.add('hidden'));
   });
 
+  document.querySelectorAll('.btnCloseDynamicModal').forEach(b => {
+    b.addEventListener('click', () => {
+      if (modalDyn) modalDyn.classList.add('hidden');
+    });
+  });
+
   modalLog.addEventListener('click', (e) => {
     if (e.target === modalLog) modalLog.classList.add('hidden');
   });
@@ -384,6 +416,12 @@ function initModals() {
   modalProd.addEventListener('click', (e) => {
     if (e.target === modalProd) modalProd.classList.add('hidden');
   });
+
+  if (modalDyn) {
+    modalDyn.addEventListener('click', (e) => {
+      if (e.target === modalDyn) modalDyn.classList.add('hidden');
+    });
+  }
 
   // Botões de abertura
   document.getElementById('btnQuickLog').addEventListener('click', () => openDefaultLogModal());
@@ -395,6 +433,26 @@ function initModals() {
     modalProd.classList.remove('hidden');
     lucide.createIcons();
   });
+
+  const btnOpenDyn = document.getElementById('btnOpenDynamicCycle');
+  if (btnOpenDyn) {
+    btnOpenDyn.addEventListener('click', () => openDynamicCycleModal());
+  }
+
+  const btnReopenDyn = document.getElementById('btnReopenDynamicCycle');
+  if (btnReopenDyn) {
+    btnReopenDyn.addEventListener('click', () => openDynamicCycleModal());
+  }
+
+  const btnClearDyn = document.getElementById('btnClearDynamicStep');
+  if (btnClearDyn) {
+    btnClearDyn.addEventListener('click', () => {
+      appState.customNextStep = null;
+      saveState();
+      renderDashboard();
+      showToast('Voltou ao cronograma linear de 4 semanas.');
+    });
+  }
 
   // Botão registro rápido dermatite
   document.getElementById('btnLogDermatitisOnly').addEventListener('click', () => {
@@ -410,6 +468,7 @@ function initModals() {
     if (confirm('Tem certeza que deseja apagar o histórico de lavagens?')) {
       appState.history = [];
       appState.currentStepIndex = 0;
+      appState.customNextStep = null;
       saveState();
       renderDashboard();
       renderHistory();
@@ -419,12 +478,26 @@ function initModals() {
 }
 
 function openDefaultLogModal() {
+  if (appState.customNextStep) {
+    const rec = appState.customNextStep;
+    openLogCareModalWithStep(
+      rec.type,
+      null,
+      rec.products ? rec.products.join(' + ') : '',
+      `Ciclo Dinâmico: ${rec.cycleName || 'Personalizado'} • ${rec.reason || ''}`,
+      {
+        isPrePoo: !!rec.suggestPrePoo,
+        isAcidifier: !!rec.suggestAcidifier
+      }
+    );
+    return;
+  }
   const currentSchedule = SCHEDULE_TEMPLATES[appState.porosity] || SCHEDULE_TEMPLATES.alta;
   const currentStep = currentSchedule[appState.currentStepIndex] || currentSchedule[0];
   openLogCareModalWithStep(currentStep.type, appState.currentStepIndex);
 }
 
-window.openLogCareModalWithStep = function(type, stepIndex) {
+window.openLogCareModalWithStep = function(type, stepIndex, prefillProducts, prefillNotes, prefillChecks) {
   const modal = document.getElementById('modalLogCare');
   const now = new Date();
   
@@ -442,6 +515,25 @@ window.openLogCareModalWithStep = function(type, stepIndex) {
 
   // Guardar o stepIndex que está sendo completado no dataset do formulário
   document.getElementById('formLogCare').dataset.targetStep = (stepIndex !== null && stepIndex !== undefined) ? stepIndex : '';
+
+  // Pré-preenchimentos opcionais (Ciclo Dinâmico)
+  if (prefillProducts !== undefined && prefillProducts !== null) {
+    document.getElementById('inputProductsUsed').value = prefillProducts;
+  }
+  if (prefillNotes !== undefined && prefillNotes !== null) {
+    document.getElementById('inputCareNotes').value = prefillNotes;
+  }
+  if (prefillChecks) {
+    if (prefillChecks.isPrePoo !== undefined) {
+      document.getElementById('checkPrePoo').checked = !!prefillChecks.isPrePoo;
+    }
+    if (prefillChecks.isAcidifier !== undefined) {
+      document.getElementById('checkAcidifier').checked = !!prefillChecks.isAcidifier;
+    }
+    if (prefillChecks.isDermatitis !== undefined) {
+      document.getElementById('checkDermatitisShampoo').checked = !!prefillChecks.isDermatitis;
+    }
+  }
 
   modal.classList.remove('hidden');
   lucide.createIcons();
@@ -507,6 +599,11 @@ function initForms() {
       } else if (targetStep === '') {
         appState.currentStepIndex = (appState.currentStepIndex + 1) % 12;
       }
+    }
+
+    // Se concluiu um cuidado dinâmico, limpar para voltar à esteira normal ou novo cálculo
+    if (appState.customNextStep) {
+      appState.customNextStep = null;
     }
 
     saveState();
@@ -1502,5 +1599,343 @@ function initIngredientAnalyzer() {
 
     lucide.createIcons();
   });
+}
+
+// ================= DECISOR DE PRÓXIMO PASSO • CICLOS DINÂMICOS =================
+let selectedLastAction = 'Hidratação';
+let selectedFeeling = 'normal';
+let currentDynamicRecommendation = null;
+
+function initDynamicCycle() {
+  const lastActionButtons = document.querySelectorAll('.dyn-btn-last');
+  const feelingButtons = document.querySelectorAll('.dyn-btn-feeling');
+
+  lastActionButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedLastAction = btn.dataset.value;
+      lastActionButtons.forEach(b => b.classList.toggle('active', b.dataset.value === selectedLastAction));
+      updateDynamicRecommendation();
+    });
+  });
+
+  feelingButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedFeeling = btn.dataset.value;
+      feelingButtons.forEach(b => b.classList.toggle('active', b.dataset.value === selectedFeeling));
+      updateDynamicRecommendation();
+    });
+  });
+
+  const btnApply = document.getElementById('btnApplyDynamicToDashboard');
+  if (btnApply) {
+    btnApply.addEventListener('click', () => {
+      if (!currentDynamicRecommendation) return;
+      appState.customNextStep = { ...currentDynamicRecommendation };
+      saveState();
+      const modal = document.getElementById('modalDynamicCycle');
+      if (modal) modal.classList.add('hidden');
+      renderDashboard();
+      showToast(`Próximo passo atualizado: ${currentDynamicRecommendation.type} (${currentDynamicRecommendation.cycleName})`);
+    });
+  }
+
+  const btnLogNow = document.getElementById('btnLogDynamicImmediately');
+  if (btnLogNow) {
+    btnLogNow.addEventListener('click', () => {
+      if (!currentDynamicRecommendation) return;
+      const rec = currentDynamicRecommendation;
+      const modal = document.getElementById('modalDynamicCycle');
+      if (modal) modal.classList.add('hidden');
+
+      // Pré-preencher e abrir modal de registro
+      openLogCareModalWithStep(
+        rec.type,
+        null,
+        rec.products ? rec.products.join(' + ') : '',
+        `Ciclo Dinâmico: ${rec.cycleName} • ${rec.reason}`,
+        {
+          isPrePoo: !!rec.suggestPrePoo,
+          isAcidifier: !!rec.suggestAcidifier,
+          isDermatitis: selectedFeeling === 'dermatite'
+        }
+      );
+    });
+  }
+}
+
+window.openDynamicCycleModal = function() {
+  const modal = document.getElementById('modalDynamicCycle');
+  if (!modal) return;
+
+  const hintEl = document.getElementById('lastActionHint');
+  if (appState.history && appState.history.length > 0) {
+    const last = appState.history[0];
+    const d = new Date(last.date + 'T' + (last.time || '12:00'));
+    if (hintEl) {
+      hintEl.textContent = `Último registro: ${last.type} (${d.toLocaleDateString('pt-BR')})`;
+    }
+    if (['Hidratação', 'Nutrição', 'Reconstrução', 'Acidificação'].includes(last.type)) {
+      selectedLastAction = last.type;
+    } else if (last.type === 'Lavagem Simples' && last.isDermatitis) {
+      selectedLastAction = 'Anticaspa';
+    } else {
+      selectedLastAction = 'Hidratação';
+    }
+
+    if (last.feeling && ['normal', 'ressecado', 'pesado', 'rigido', 'poroso', 'dermatite'].includes(last.feeling)) {
+      selectedFeeling = last.feeling;
+    } else {
+      selectedFeeling = 'normal';
+    }
+  } else {
+    if (hintEl) hintEl.textContent = 'Nenhuma lavagem registrada ainda';
+    selectedLastAction = 'Hidratação';
+    selectedFeeling = 'normal';
+  }
+
+  // Sincronizar botões ativos
+  document.querySelectorAll('.dyn-btn-last').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.value === selectedLastAction);
+  });
+  document.querySelectorAll('.dyn-btn-feeling').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.value === selectedFeeling);
+  });
+
+  updateDynamicRecommendation();
+  modal.classList.remove('hidden');
+  lucide.createIcons();
+};
+
+function updateDynamicRecommendation() {
+  const rec = calculateDynamicNextStep(selectedLastAction, selectedFeeling);
+  currentDynamicRecommendation = rec;
+
+  const badgeType = document.getElementById('dynResultBadgeType');
+  const cycleName = document.getElementById('dynResultCycleName');
+  const title = document.getElementById('dynResultTitle');
+  const reason = document.getElementById('dynResultReason');
+  const productsContainer = document.getElementById('dynResultProducts');
+  const scalpTip = document.getElementById('dynResultScalpTipText');
+
+  if (badgeType) badgeType.textContent = rec.type;
+  if (cycleName) cycleName.textContent = rec.cycleName;
+  if (title) title.textContent = `Próximo Cuidado Recomendado: ${rec.title}`;
+  if (reason) reason.textContent = rec.reason;
+  if (scalpTip) scalpTip.textContent = rec.scalpTip;
+
+  if (badgeType) {
+    badgeType.className = 'px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ';
+    if (rec.type === 'Hidratação') {
+      badgeType.classList.add('bg-sky-100', 'text-sky-800', 'border-sky-300');
+    } else if (rec.type === 'Nutrição') {
+      badgeType.classList.add('bg-amber-100', 'text-amber-800', 'border-amber-300');
+    } else if (rec.type === 'Reconstrução') {
+      badgeType.classList.add('bg-purple-100', 'text-purple-800', 'border-purple-300');
+    } else if (rec.type === 'Acidificação') {
+      badgeType.classList.add('bg-rose-100', 'text-rose-800', 'border-rose-300');
+    } else {
+      badgeType.classList.add('bg-teal-100', 'text-teal-800', 'border-teal-300');
+    }
+  }
+
+  if (productsContainer) {
+    productsContainer.innerHTML = '';
+    if (rec.products && rec.products.length > 0) {
+      rec.products.forEach(p => {
+        const span = document.createElement('span');
+        span.className = 'inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-800 font-medium text-[11px] shadow-2xs';
+        span.innerHTML = `<i data-lucide="check" class="w-3 h-3 text-emerald-600"></i> ${p}`;
+        productsContainer.appendChild(span);
+      });
+    }
+  }
+
+  lucide.createIcons();
+}
+
+function calculateDynamicNextStep(lastAction, feeling) {
+  let daysSinceReconstruction = 999;
+  const lastReconLog = appState.history.find(h => h.type === 'Reconstrução');
+  if (lastReconLog) {
+    const d = new Date(lastReconLog.date + 'T' + (lastReconLog.time || '12:00'));
+    daysSinceReconstruction = Math.floor((new Date() - d) / (1000 * 60 * 60 * 24));
+  }
+
+  let daysSinceDermatitis = 999;
+  if (appState.lastDermatitisDate) {
+    const d = new Date(appState.lastDermatitisDate);
+    daysSinceDermatitis = Math.floor((new Date() - d) / (1000 * 60 * 60 * 24));
+  }
+
+  const porosity = appState.porosity || 'alta';
+
+  let result = {
+    type: 'Hidratação',
+    cycleName: 'Ciclo Hidra-Pureza',
+    title: 'Hidratação Fluida Botânica',
+    desc: 'Reposição hídrica pura com Wella Elements Renewing para manter a elasticidade sem pesar o fio fino.',
+    reason: 'A hidratação é o pilar de sustentação do fio fino 2C/3A. Devolve água e maleabilidade sem sobrecarregar com óleos ou proteínas.',
+    products: ['Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia'],
+    scalpTip: 'Lave o couro normalmente. Mantenha os produtos de tratamento a 3 dedos da raiz.',
+    suggestPrePoo: true,
+    suggestAcidifier: false
+  };
+
+  // CASO 1: Última ação foi RECONSTRUÇÃO
+  if (lastAction === 'Reconstrução') {
+    if (feeling === 'pesado') {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Maleabilidade & Detox';
+      result.title = 'Hidratação Leve com Acidificante';
+      result.desc = 'Lave com shampoo equilibrado, aplique Wella Elements nas pontas e finalize com toque de K.Pro pH Balancer.';
+      result.reason = 'Após reconstrução proteica, o fio fino nunca deve receber nova carga pesada. A hidratação restaura a água e o acidificante previne rigidez e sela cutículas.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'pH Balancer Acidificante (K.Pro)', 'Óleo Oil Reflections Light (Wella)'];
+      result.suggestAcidifier = true;
+    } else if (feeling === 'rigido' || feeling === 'ressecado') {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Suavização & Emoliência Pós-Queratina';
+      result.title = 'Hidratação Hídrica Profunda sem Silicones';
+      result.desc = 'Wella Elements Renewing com pausa de 5 min na toalha de microfibra + Leave-in Lowell Bioplastia para desembaraço suave.';
+      result.reason = 'A sensação de rigidez é um alerta clássico de excesso de queratina/proteína. O remédio imediato é hidratação botânica sem peso para amolecer a fibra.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Leave-in Reconstrutor Bioplastia (Lowell)', 'Touca de Cetim à noite'];
+    } else if (feeling === 'poroso') {
+      result.type = 'Acidificação';
+      result.cycleName = 'Ciclo Selagem Cuticular Pós-Proteína';
+      result.title = 'Acidificação Cuticular + Hidratação Rápida';
+      result.desc = 'K.Pro pH Balancer por 3 minutos logo após o shampoo, seguido de 2 minutos de Wella Elements para selar o fio.';
+      result.reason = 'Mesmo após a proteína da reconstrução, as cutículas precisam de pH ácido (2.2-2.5) para fechar e travar o tratamento dentro do córtex.';
+      result.products = ['pH Balancer Acidificante (K.Pro)', 'Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia'];
+      result.suggestAcidifier = true;
+    } else {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Hidra-Equilíbrio Pós-Reconstrução';
+      result.title = 'Hidratação Fluida Restauradora';
+      result.desc = 'Wella Elements Renewing para restabelecer a água perdida e equilibrar os aminoácidos depositados pela reconstrução.';
+      result.reason = 'Regra de ouro do fio fino: toda reconstrução precisa ser seguida por 1 a 2 hidratações puras para manter o balanço e a elasticidade dos cachos.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia'];
+    }
+  }
+
+  // CASO 2: Última ação foi NUTRIÇÃO / UMECTAÇÃO
+  else if (lastAction === 'Nutrição') {
+    if (feeling === 'pesado') {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Anti-Acúmulo (Anti-Build Up)';
+      result.title = 'Hidratação Aquosa Botânica Pura (Sem Óleos)';
+      result.desc = 'Lave com shampoo transparente ou Dercos na raiz, máscara Wella Elements apenas no comprimento, sem adicionar óleos pesados.';
+      result.reason = 'O fio fino 2C/3A saturou com os óleos da nutrição anterior. Mais lipídios vão desmanchar a curvatura e deixar a raiz murcha. A hidratação sem silicone é ideal.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia (dose mínima)'];
+      result.suggestAcidifier = false;
+    } else if (feeling === 'rigido') {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Maleabilidade & Água';
+      result.title = 'Hidratação Fluida com Toalha Morna';
+      result.desc = 'Wella Elements Renewing com tempo de ação de 5 min para devolver a elasticidade e maciez.';
+      result.reason = 'Falta de água (elasticidade) no córtex capilar. A hidratação vai restaurar o alongamento e o toque acetinado das ondas.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Toalha de Microfibra com Botão'];
+    } else if (feeling === 'poroso') {
+      result.type = 'Acidificação';
+      result.cycleName = 'Ciclo Retenção Lipídica & Selagem';
+      result.title = 'Acidificação Cuticular K.Pro + Leave-in';
+      result.desc = 'Aplique o Acidificante K.Pro (3 min) após enxaguar para estabilizar o pH da fibra e travar os lipídios da nutrição.';
+      result.reason = 'Fio poroso perde os óleos da nutrição facilmente. O K.Pro pH Balancer sela as escamas do fio para reter a nutrição e dar brilho espelhado.';
+      result.products = ['pH Balancer Acidificante (K.Pro)', 'Óleo Oil Reflections Light (Wella)'];
+      result.suggestAcidifier = true;
+    } else if (daysSinceReconstruction > 25 && (porosity === 'alta' || feeling === 'ressecado')) {
+      result.type = 'Reconstrução';
+      result.cycleName = 'Ciclo Reparação Estrutural Segura';
+      result.title = 'Reconstrução Gold Quinoa & Proteína';
+      result.desc = 'L\'Oréal Absolut Repair Gold Quinoa em quantidade controlada (1 espátula) + Acidificante K.Pro.';
+      result.reason = 'Como o fio já recebeu nutrição e está há mais de 25 dias sem queratina, o córtex está preparado para receber a carga proteica sem perigo de rigidez.';
+      result.products = ['Máscara Absolut Repair Gold Quinoa (L\'Oréal)', 'pH Balancer Acidificante (K.Pro)', 'Leave-in Lowell Bioplastia'];
+    } else {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Equilíbrio Hídrico-Lipídico';
+      result.title = 'Hidratação Fluida com Finalização Leve';
+      result.desc = 'Wella Elements Renewing para repor a água intercalando com os lipídios anteriores, finalizando com 1 gota de Oil Reflections Light.';
+      result.reason = 'Alternar Nutrição com Hidratação é a harmonia perfeita para evitar o acúmulo de óleo e manter o cacho 2C/3A solto, leve e definido.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Óleo Oil Reflections Light (Wella)'];
+    }
+  }
+
+  // CASO 3: Última ação foi HIDRATAÇÃO
+  else if (lastAction === 'Hidratação') {
+    if (feeling === 'ressecado' || feeling === 'poroso') {
+      result.type = 'Nutrição';
+      result.cycleName = 'Ciclo Alinhamento Lipídico & Anti-Frizz';
+      result.title = 'Nutrição Luminosa com Wella Reboost';
+      result.desc = 'Wella Oil Reflections Reboost (dose de 1 moeda pequena) com enxágue 100% abundante + 2 gotas de Óleo Light nas pontas.';
+      result.reason = 'Você já repôs água na última lavagem; se o fio continua áspero ou com frizz, falta a barreira lipídica (óleos nobres) para selar essa umidade dentro do fio.';
+      result.products = ['Máscara Oil Reflections Reboost (Wella)', 'Óleo de Semente de Uva Farmax (Pré-poo)', 'Óleo Oil Reflections Light (Wella)'];
+    } else if (feeling === 'pesado') {
+      result.type = 'Acidificação';
+      result.cycleName = 'Ciclo Reequilíbrio Cuticular';
+      result.title = 'Lavagem Leve + Acidificante K.Pro pH Balancer';
+      result.desc = 'Lave com shampoo equilibrado, aplique o K.Pro por 3 minutos e enxágue bem. Use pouquíssimo finalizador.';
+      result.reason = 'Sensação de peso após hidratação pura indica cutícula frouxa ou resíduo de finalizador. Acidificar fecha as escamas sem adicionar gordura.';
+      result.products = ['pH Balancer Acidificante (K.Pro)', 'Leave-in Lowell Bioplastia'];
+      result.suggestAcidifier = true;
+    } else if (feeling === 'rigido' || daysSinceReconstruction < 15) {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Hidra-Plus Botânica';
+      result.title = 'Segunda Sessão de Hidratação Fluida';
+      result.desc = 'Repita a Wella Elements Renewing. Fios finos se beneficiam amplamente de 2 hidratações consecutivas para máxima maleabilidade.';
+      result.reason = 'O fio ainda está absorvendo a água e precisa de reforço hídrico antes de qualquer nova carga de óleos ou proteínas.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia'];
+    } else if (daysSinceReconstruction > 25 && (porosity === 'alta' || porosity === 'media')) {
+      result.type = 'Reconstrução';
+      result.cycleName = 'Ciclo Força Estrutural Mensal';
+      result.title = 'Reconstrução com Absolut Repair Gold Quinoa';
+      result.desc = 'L\'Oréal Absolut Repair (pausa de 3 a 5 min) para devolver aminoácidos e renovar a estrutura capilar.';
+      result.reason = 'Com hidratação recente em dia e intervalo seguro (>25 dias da última reconstrução), o cabelo tem o cenário perfeito para receber aminoácidos sem enrijecer.';
+      result.products = ['Máscara Absolut Repair Gold Quinoa (L\'Oréal)', 'pH Balancer Acidificante (K.Pro)'];
+    } else {
+      result.type = 'Nutrição';
+      result.cycleName = 'Ciclo Brilho Espelhado & Definição';
+      result.title = 'Nutrição Suave com Wella Reboost';
+      result.desc = 'Wella Oil Reflections Reboost nas pontas para dar brilho espelhado e definição duradoura aos cachos 2C/3A.';
+      result.reason = 'Com a água em dia, a camada de óleo de camélia do Reboost vai selar o brilho e eliminar o frizz pós-secagem.';
+      result.products = ['Máscara Oil Reflections Reboost (Wella)', 'Óleo Oil Reflections Light (Wella)'];
+    }
+  }
+
+  // CASO 4: Última ação foi ACIDIFICAÇÃO
+  else if (lastAction === 'Acidificação') {
+    if (feeling === 'ressecado' || feeling === 'normal') {
+      result.type = 'Hidratação';
+      result.cycleName = 'Ciclo Hidratação com Cutículas Seladas';
+      result.title = 'Hidratação Máxima com Wella Elements';
+      result.desc = 'Aplique a Wella Elements Renewing nos fios selados pelo acidificante recente para reter a hidratação por muito mais tempo.';
+      result.reason = 'Cutículas recém-acidificadas retêm a hidratação de maneira impecável. O cabelo absorve a água e não a perde com facilidade.';
+      result.products = ['Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia', 'Touca de Cetim à noite'];
+    } else {
+      result.type = 'Nutrição';
+      result.cycleName = 'Ciclo Nutrição Brilho Espelhado';
+      result.title = 'Nutrição Luminosa com Wella Reboost';
+      result.desc = 'Wella Reboost para aproveitar as cutículas alinhadas e conferir brilho espelhado e toque sedoso.';
+      result.reason = 'As cutículas alinhadas pelo K.Pro vão refletir a luz com máxima intensidade com os lipídios nobres do Reboost.';
+      result.products = ['Máscara Oil Reflections Reboost (Wella)', 'Óleo Oil Reflections Light (Wella)'];
+    }
+  }
+
+  // CASO 5: Última ação foi APENAS SHAMPOO ANTICASPA / LAVAGEM RÁPIDA
+  else if (lastAction === 'Anticaspa') {
+    result.type = 'Hidratação';
+    result.cycleName = 'Ciclo Resgate Scalp & Comprimento';
+    result.title = 'Hidratação Reparadora com Pré-Poo';
+    result.desc = 'Aplique 6 gotas de Óleo Farmax nas pontas antes do banho. Lave a raiz com Dercos (3 min) e trate as pontas com Wella Elements Renewing.';
+    result.reason = 'O shampoo de tratamento de dermatite (Dercos/Cetoconazol) é adstringente e limpa o couro, mas resseca as pontas finas. O pré-poo com óleo vegetal de semente de uva cria uma barreira lipídica salvadora.';
+    result.products = ['Óleo de Semente de Uva Farmax (Pré-poo Obrigatório)', 'Dercos Anticaspa / Cetoconazol', 'Máscara Elements Renewing (Wella)', 'Leave-in Lowell Bioplastia'];
+    result.suggestPrePoo = true;
+  }
+
+  // REGRA DE COURO CABELUDO (Dermatite)
+  if (feeling === 'dermatite' || daysSinceDermatitis >= 4) {
+    result.scalpTip = '🚨 Couro Cabeludo em Alerta: Use o shampoo anticaspa (Dercos/Cetoconazol) exclusivamente no couro com pausa de 3 minutos no timer. BLINDE as pontas com 5 gotas de Óleo de Uva Farmax 15 min antes da água!';
+  } else {
+    result.scalpTip = 'Couro Cabeludo Saudável: Mantenha o shampoo anticaspa no espaçamento habitual (2 a 3x na semana). Nunca durma com a raiz úmida.';
+  }
+
+  return result;
 }
 

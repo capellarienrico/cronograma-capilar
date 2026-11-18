@@ -160,3 +160,18 @@
 .pulse-timer {
   animation: pulseSubtle 1.5s infinite;
 }
+
+/* Dynamic Cycle Active Buttons */
+.dyn-btn-last.active {
+  border-color: #0d9488 !important;
+  background-color: #f0fdfa !important;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3) !important;
+  font-weight: 600;
+}
+
+.dyn-btn-feeling.active {
+  border-color: #0d9488 !important;
+  background-color: #f0fdfa !important;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3) !important;
+  font-weight: 600;
+}
