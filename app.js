@@ -250,7 +250,7 @@ function renderDashboard() {
   }
 
   // Cores do badge
-  badgeNextType.className = 'px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider border ';
+  badgeNextType.className = 'px-3 py-1 rounded-full text-xs font-semibold border ';
   if (effectiveType === 'Hidratação') {
     badgeNextType.classList.add('bg-sky-500/20', 'text-sky-300', 'border-sky-500/40');
   } else if (effectiveType === 'Nutrição') {
@@ -371,7 +371,7 @@ function renderWeeksGrid(schedule) {
 
     weekCard.innerHTML = `
       <div class="flex items-center justify-between">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
+        <h4 class="text-xs font-bold text-slate-700 flex items-center gap-2">
           <span>Semana ${w}</span>
           ${w === 2 || w === 4 ? '<span class="text-[10px] text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.2 rounded font-normal">Semana de Reconstrução / Acidificação</span>' : ''}
         </h4>
@@ -1419,16 +1419,16 @@ function renderRecommendedCatalogue(filterBudget = currentBudgetFilter, filterCa
     const isAlreadyInShelf = appState.products.some(p => p.name.toLowerCase() === item.name.toLowerCase());
 
     let budgetTag = '';
-    if (item.budget === 'baratinho') budgetTag = '<span class="text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded font-bold">🟢 Econômico</span>';
-    if (item.budget === 'custo-beneficio') budgetTag = '<span class="text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.2 rounded font-bold">🟡 Custo-Benefício</span>';
-    if (item.budget === 'premium') budgetTag = '<span class="text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.2 rounded font-bold">🟣 Profissional</span>';
+    if (item.budget === 'baratinho') budgetTag = '<span class="text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded font-bold">Econômico</span>';
+    if (item.budget === 'custo-beneficio') budgetTag = '<span class="text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.2 rounded font-bold">Custo-Benefício</span>';
+    if (item.budget === 'premium') budgetTag = '<span class="text-purple-700 bg-purple-50 border border-purple-200 px-1.5 py-0.2 rounded font-bold">Profissional</span>';
 
     const card = document.createElement('div');
     card.className = 'p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 flex flex-col justify-between space-y-2.5';
     card.innerHTML = `
       <div>
         <div class="flex items-center justify-between text-[10px] font-semibold text-slate-500 mb-1.5">
-          <span class="uppercase tracking-wider px-1.5 py-0.5 rounded bg-white border border-slate-200">${item.category}</span>
+          <span class="px-1.5 py-0.5 rounded bg-white border border-slate-200">${item.category}</span>
           ${budgetTag}
         </div>
         <div class="flex items-baseline justify-between gap-1">
@@ -1747,7 +1747,7 @@ function updateDynamicRecommendation() {
   if (scalpTip) scalpTip.textContent = rec.scalpTip;
 
   if (badgeType) {
-    badgeType.className = 'px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ';
+    badgeType.className = 'px-2.5 py-1 rounded-full text-xs font-bold border ';
     if (rec.type === 'Hidratação') {
       badgeType.classList.add('bg-sky-100', 'text-sky-800', 'border-sky-300');
     } else if (rec.type === 'Nutrição') {

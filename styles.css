@@ -140,25 +140,16 @@
 /* Week Step Cards */
 .step-item {
   position: relative;
-  transition: all 0.2s ease;
-}
-
-.step-item:hover {
-  transform: translateY(-2px);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .step-item.done {
   opacity: 0.85;
 }
 
-/* Animations */
-@keyframes pulseSubtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
+/* Timer Display */
 .pulse-timer {
-  animation: pulseSubtle 1.5s infinite;
+  font-weight: 700;
 }
 
 /* Dynamic Cycle Active Buttons */

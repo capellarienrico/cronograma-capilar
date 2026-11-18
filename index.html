@@ -54,7 +54,7 @@
   <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-rose-400 text-white flex items-center justify-center shadow-md shadow-brand-500/20">
+        <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center">
           <i data-lucide="sparkles" class="w-5 h-5"></i>
         </div>
         <div>
@@ -78,7 +78,7 @@
           <i data-lucide="download" class="w-4 h-4"></i>
           <span>Instalar App</span>
         </button>
-        <button id="btnQuickLog" class="bg-brand-600 hover:bg-brand-700 text-white px-3.5 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition shadow-sm shadow-brand-600/30">
+        <button id="btnQuickLog" class="bg-brand-600 hover:bg-brand-700 text-white px-3.5 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition shadow-sm">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
           <span class="hidden sm:inline">Registrar Cuidado</span>
         </button>
@@ -123,19 +123,18 @@
     <section id="tab-dashboard" class="tab-pane active space-y-6">
       
       <!-- Banner Próxima Lavagem / Hoje -->
-      <div id="todayCard" class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white p-6 sm:p-8 shadow-xl">
-        <div class="absolute right-0 top-0 -mt-6 -mr-6 w-48 h-48 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div id="todayCard" class="relative rounded-2xl bg-slate-900 text-white p-6 sm:p-8 border border-slate-800">
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-2">
             <div class="flex flex-wrap items-center gap-2">
-              <span id="badgeNextType" class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-500/30 text-brand-300 border border-brand-500/40">
+              <span id="badgeNextType" class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/30 text-brand-300 border border-brand-500/40">
                 Hidratação
               </span>
               <span id="badgeScheduleDay" class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">
                 Semana 1 • Lavagem 1
               </span>
             </div>
-            <h2 id="nextStepTitle" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h2 id="nextStepTitle" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Próximo Cuidado: Hidratação
             </h2>
             <p id="nextStepDesc" class="text-slate-300 text-sm max-w-xl">
@@ -154,11 +153,11 @@
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3">
-            <button id="btnMarkDoneNow" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-3 rounded-xl font-semibold shadow-lg shadow-brand-600/40 flex items-center justify-center gap-2 transition hover:scale-[1.02] active:scale-[0.98]">
+            <button id="btnMarkDoneNow" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition">
               <i data-lucide="check" class="w-5 h-5"></i>
               Marcar como Feito Hoje
             </button>
-            <button id="btnOpenDynamicCycle" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-3 rounded-xl font-semibold shadow-lg shadow-teal-600/40 flex items-center justify-center gap-2 transition hover:scale-[1.02] active:scale-[0.98]" title="Decidir próximo passo dinâmico baseado no que você fez">
+            <button id="btnOpenDynamicCycle" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition" title="Decidir próximo passo dinâmico baseado no que você fez">
               <i data-lucide="git-branch" class="w-4 h-4"></i>
               <span>Qual o Próximo Passo?</span>
             </button>
@@ -191,14 +190,14 @@
       </div>
 
       <!-- Notificação de Ciclo Dinâmico Ativo -->
-      <div id="dynamicStepNotice" class="hidden bg-gradient-to-r from-teal-50 via-emerald-50 to-sky-50 border border-teal-200/80 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-teal-950 shadow-xs">
+      <div id="dynamicStepNotice" class="hidden bg-teal-50 border border-teal-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-teal-950">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-teal-600/30">
+          <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0">
             <i data-lucide="compass" class="w-5 h-5"></i>
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-[11px] font-bold uppercase tracking-wider bg-teal-200/80 text-teal-900 px-2 py-0.5 rounded-md">Ciclo Dinâmico Ativo</span>
+              <span class="text-[11px] font-bold bg-teal-200/80 text-teal-900 px-2 py-0.5 rounded-md">Ciclo Dinâmico Ativo</span>
               <span id="dynamicStepTitleBadge" class="text-xs font-bold text-teal-800"></span>
             </div>
             <p id="dynamicStepNoticeDesc" class="text-xs text-teal-700 mt-0.5 max-w-xl"></p>
@@ -404,16 +403,16 @@
 
         <!-- Bloco de Respostas Críticas -->
         <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+          <h4 class="text-xs font-bold text-slate-800 flex items-center gap-1.5">
             <i data-lucide="help-circle" class="w-4 h-4 text-teal-600"></i> Perguntas Frequentes do Ritual:
           </h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600">
             <div class="bg-white p-3 rounded-lg border border-slate-200/80 space-y-1">
-              <strong class="text-slate-900 block font-semibold">❓ Devo usar condicionador tradicional?</strong>
+              <strong class="text-slate-900 block font-semibold">Devo usar condicionador tradicional?</strong>
               <p><strong>Não é necessário!</strong> Suas máscaras profissionais (Wella e L'Oréal) já possuem alta carga condicionante, e o Acidificante K.Pro (pH 2.2) sela a cutícula com perfeição. Usar condicionador a mais no fio fino 2C/3A vai murchar suas ondas e causar peso/acúmulo.</p>
             </div>
             <div class="bg-white p-3 rounded-lg border border-slate-200/80 space-y-1">
-              <strong class="text-slate-900 block font-semibold">❓ Existem dias que NÃO devo lavar?</strong>
+              <strong class="text-slate-900 block font-semibold">Existem dias que NÃO devo lavar?</strong>
               <p><strong>Sim! O ideal é lavar dia sim, dia não (3 a 4x/semana).</strong> Nos dias de intervalo (Day After), use a <strong>touca de cetim</strong> para dormir, não molhe o cabelo no chuveiro e use apenas 1 gota de óleo leve se precisar reativar as pontas.</p>
             </div>
           </div>
@@ -1084,7 +1083,7 @@
         <!-- Pergunta 1: O que foi feito por último? -->
         <div class="space-y-2">
           <div class="flex items-center justify-between">
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+            <label class="block text-xs font-bold text-slate-700">
               1. Qual foi a última coisa que você fez?
             </label>
             <span id="lastActionHint" class="text-[11px] text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md font-medium border border-teal-100"></span>
@@ -1129,7 +1128,7 @@
 
         <!-- Pergunta 2: Como está a sensação do cabelo hoje? -->
         <div class="space-y-2">
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+          <label class="block text-xs font-bold text-slate-700">
             2. Como seu cabelo ou couro cabeludo está se comportando hoje?
           </label>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="dynamicHairFeelingOptions">
@@ -1166,11 +1165,11 @@
         </div>
 
         <!-- Card de Resultado da Decisão -->
-        <div id="dynamicDecisionResult" class="rounded-2xl border-2 border-teal-500/40 bg-gradient-to-br from-teal-50/70 via-white to-sky-50/50 p-4 sm:p-5 space-y-4 shadow-sm">
+        <div id="dynamicDecisionResult" class="rounded-2xl border-2 border-teal-500/40 bg-teal-50/50 p-4 sm:p-5 space-y-4 shadow-sm">
           <div class="flex items-start justify-between gap-3">
             <div>
               <div class="flex items-center gap-2">
-                <span id="dynResultBadgeType" class="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-100 text-sky-800 border border-sky-300">
+                <span id="dynResultBadgeType" class="px-2.5 py-1 rounded-full text-xs font-bold bg-sky-100 text-sky-800 border border-sky-300">
                   Hidratação
                 </span>
                 <span id="dynResultCycleName" class="text-xs font-semibold text-teal-800">
@@ -1194,7 +1193,7 @@
           </div>
 
           <div class="space-y-1.5">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+            <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
               <i data-lucide="package" class="w-3.5 h-3.5 text-teal-600"></i> Produtos recomendados do seu Armário:
             </span>
             <div id="dynResultProducts" class="flex flex-wrap gap-1.5 text-xs">

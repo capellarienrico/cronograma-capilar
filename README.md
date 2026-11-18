@@ -1,9 +1,9 @@
-# CapilarFlow 🌿💆‍♀️
+# CapilarFlow
 > Aplicativo de Cronograma Capilar & Scalp Care personalizado para Cabelo 2C/3A Fio Fino & Dermatite Seborreica.
 
 ![CapilarFlow Banner](icon.svg)
 
-## ✨ Sobre o Projeto
+## Sobre o Projeto
 O **CapilarFlow** foi desenvolvido sob medida para rotinas capilares com necessidades específicas:
 - **Curvatura 2C / 3A (Ondulado a Cacho Aberto)** com **Fio Fino** (sensível a peso e acúmulo de resíduos).
 - **Baixa Porosidade** (cutículas fechadas, necessitando de hidratações aquosas e fluidas, com restrição a excesso de queratina).
@@ -11,8 +11,8 @@ O **CapilarFlow** foi desenvolvido sob medida para rotinas capilares com necessi
 
 ---
 
-## 🚀 Funcionalidades
-1. **Decisor de Próximo Passo & Ciclos Dinâmicos (Novo! 🔄🌿):**
+## Funcionalidades
+1. **Decisor de Próximo Passo & Ciclos Dinâmicos:**
    - Rompe com a esteira rígida de 12 etapas em linha reta.
    - Janela interativa onde você aponta o que fez na última lavagem (Hidratação, Nutrição, Reconstrução, Acidificação ou Anticaspa) e o estado atual do fio.
    - Diagnóstico científico imediato com cálculo da próxima etapa ideal, evitando sobrecarga de proteína (*overload*), *build-up* de óleos no fio fino 2C/3A e ressecamento pós-shampoo anticaspa.
@@ -22,25 +22,25 @@ O **CapilarFlow** foi desenvolvido sob medida para rotinas capilares com necessi
    - Pré-calibrado com produtos profissionais de salão: **Wella Elements Renewing** (Hidratação), **Wella Oil Reflections Reboost** (Nutrição), **L'Oréal Absolut Repair Gold Quinoa** (Reconstrução), **K.Pro pH Balancer** (Acidificação), **Farmax Uva** (Pré-Poo) e **Lowell Bioplastia** (Finalizador).
 3. **Protocolo para Dermatite Seborreica & Acessórios:**
    - Alertas e regras de ouro (pré-poo protetor, nunca dormir com cabelo molhado).
-   - Guia de acessórios: **Espátula Profissional** (proteção microbiológica dos potes de 500g), **Toalha de Microfibra com Botão** (secagem sem atrito/sem frizz) e **Touca de Cetim Dupla Face** (preservação do alinhamento noturno e Day After).
+   - Guia de acessórios: **Espátula Profissional** (proteção microbiológica dos potes de 500g), **Toalha de Microfibra com Botão** (secagem sem atrito e sem frizz) e **Touca de Cetim Dupla Face** (preservação do alinhamento noturno e Day After).
    - **Timer integrado de 3 minutos** com alarme para o tempo de ação do shampoo anticaspa no banho.
    - Contador de dias desde o último uso de shampoo medicamentoso.
-3. **Calibrador de Porosidade:**
+4. **Calibrador de Porosidade:**
    - Guia interativo do Teste do Copo d'Água (Boiou, Ficou no Meio, Afundou).
    - Recalibra o cronograma com apenas 1 clique.
-4. **Analisador de Rótulos de Produtos:**
+5. **Analisador de Rótulos de Produtos:**
    - Cole a composição de qualquer produto para identificar automaticamente a etapa (H, N ou R) e receber um veredito se o produto é seguro ou se pesa no fio fino.
-5. **Vitrine & Meu Armário:**
+6. **Vitrine & Meu Armário:**
    - Lista com produtos recomendados prontos para adicionar com 1 clique.
    - Gestão de produtos cadastrados por categoria (Pré-poo, Dermatite, H, N, R, Acidificante, Finalizador).
-6. **Histórico Completo:**
+7. **Histórico Completo:**
    - Registro de lavagens, notas e sensação pós-secagem salvos automaticamente no navegador (`localStorage`).
-7. **PWA & Offline:**
+8. **PWA & Offline:**
    - Funciona no computador e pode ser instalado como app no Android através do Chrome.
 
 ---
 
-## 🛠️ Como Executar
+## Como Executar
 
 ### No Computador
 Basta dar dois cliques no arquivo:
@@ -54,7 +54,7 @@ Ou abrir o arquivo `index.html` em qualquer navegador.
 2. Abra o endereço exibido no navegador do seu smartphone Android.
 3. Toque em **"Instalar App"** para adicionar à tela inicial.
 
-### 📱 Como APK Nativo (Android)
+### Como APK Nativo (Android)
 O projeto conta com integração nativa via **Capacitor** e pipeline automatizado no **GitHub Actions**:
 1. Acesse a aba **Actions** no repositório do GitHub ou a seção **Releases**.
 2. Baixe o arquivo **`CapilarFlow.apk`**.
@@ -70,5 +70,5 @@ O APK gerado ficará em `android/app/build/outputs/apk/debug/app-debug.apk`.
 
 ---
 
-## 👤 Autor
+## Autor
 - **GitHub:** [@capellarienrico](https://github.com/capellarienrico)
