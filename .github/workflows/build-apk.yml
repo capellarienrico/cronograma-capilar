@@ -62,14 +62,20 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: android/app/build/outputs/apk/debug/CapilarFlow.apk
-          name: "CapilarFlow v1.0.0 (APK Android)"
-          tag_name: "v1.0.0-apk"
+          name: "CapilarFlow ${{ github.ref_name }} (APK Android)"
+          tag_name: ${{ github.ref_name }}
           body: |
-            ### 📱 CapilarFlow - Aplicativo Android (APK)
+            ### 📱 CapilarFlow ${{ github.ref_name }} - Aplicativo Android (APK)
             
             Versão instalável gerada automaticamente via **Capacitor + Android WebView**:
             - Baixe o arquivo `CapilarFlow.apk` abaixo e instale diretamente no seu celular Android.
             - Funciona 100% offline com persistência local de dados.
             - Compatível com Android 7.0+ (API 24+).
+            
+            ### 🌿 Novidades da Versão:
+            - **Decisor de Próximo Passo & Ciclos Dinâmicos:** Cálculo adaptativo baseado no último cuidado e estado atual do fio.
+            - **Guia do Ritual de Banho & Ordem dos Produtos:** Sequência 0 a 5 explicada passo a passo (Pré-poo com Óleo de Uva, Shampoo Anticaspa 3 min, Microfibra, Máscara com espátula, Acidificante K.Pro e Leave-in Lowell).
+            - **Dispensa de Condicionador:** Esclarecimento técnico de porque condicionador a mais pesa no fio fino 2C/3A.
+            - **Frequência de Lavagem:** Orientação para lavar dia sim, dia não e proteção noturna com touca de cetim.
           draft: false
           prerelease: false
